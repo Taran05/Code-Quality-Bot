@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RepositoryService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services</a>
+</div>
+
+<h1>Coverage Summary for Class: RepositoryService (com.github.codergate.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RepositoryService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (2/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1.9%
+  </span>
+  <span class="absValue">
+    (2/108)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.github.codergate.dto.RepositoryMinimal;
+&nbsp;import com.github.codergate.dto.analysis.AnalysisDTO;
+&nbsp;import com.github.codergate.dto.controller.RepositoryResponse;
+&nbsp;import com.github.codergate.dto.installation.RepositoriesAddedDTO;
+&nbsp;import com.github.codergate.entities.RepositoryEntity;
+&nbsp;import com.github.codergate.entities.UserEntity;
+&nbsp;import com.github.codergate.repositories.RepositoryRepository;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class RepositoryService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    RepositoryRepository repositoryRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AnalysisService analysisService;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryService.class);</b>
+&nbsp;
+&nbsp;    /***
+&nbsp;     * adds the repository to the table during installation event
+&nbsp;     * 
+&nbsp;     * @param repositories repository information
+&nbsp;     * @param userId       user id
+&nbsp;     * @return RepositoriesAdded dto class
+&nbsp;     */
+&nbsp;    public List&lt;RepositoriesAddedDTO&gt; addRepository(List&lt;RepositoriesAddedDTO&gt; repositories, int userId) {
+<b class="nc">&nbsp;        List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto = null;</b>
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; repositoryEntityList = convertDTOToEntityForInstallationEvent(repositories, userId);</b>
+<b class="nc">&nbsp;        if (repositoryEntityList != null) {</b>
+<b class="nc">&nbsp;            List&lt;RepositoryEntity&gt; saveRepositoryEntity = repositoryRepository.saveAll(repositoryEntityList);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;addRepository : The repositoryRepository information  for installation event is added {}&quot;,</b>
+&nbsp;                    saveRepositoryEntity);
+<b class="nc">&nbsp;            repositoriesAddedDto = convertEntityToDTO(saveRepositoryEntity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * adds the repository to the table during push event
+&nbsp;     * 
+&nbsp;     * @param
+&nbsp;     * @param userId user id
+&nbsp;     * @return RepositoryDTO
+&nbsp;     */
+&nbsp;    public RepositoryEntity addRepository(Integer id, String name, Boolean fork, int userId, String installationId) {
+<b class="nc">&nbsp;        RepositoryEntity repositoryEntity = convertDTOToEntityForPushEvent(id, name, fork, userId, installationId);</b>
+<b class="nc">&nbsp;        RepositoryEntity saveRepositoryEntity = repositoryRepository.save(repositoryEntity);</b>
+<b class="nc">&nbsp;        LOGGER.info(&quot;addRepository : The repositoryRepository information for push event is added {}&quot;,</b>
+&nbsp;                saveRepositoryEntity);
+<b class="nc">&nbsp;        return repositoryEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * gets the repository information using id
+&nbsp;     * 
+&nbsp;     * @param repositoryId repositoryId
+&nbsp;     * @return RepositoriesAdded dto class
+&nbsp;     */
+&nbsp;    public List&lt;RepositoriesAddedDTO&gt; getRepositoryById(List&lt;Integer&gt; repositoryId) {
+<b class="nc">&nbsp;        List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto = null;</b>
+<b class="nc">&nbsp;        for (int id : repositoryId) {</b>
+<b class="nc">&nbsp;            Optional&lt;RepositoryEntity&gt; repositoryEntity = repositoryRepository.findById(id);</b>
+<b class="nc">&nbsp;            if (repositoryEntity.isPresent()) {</b>
+<b class="nc">&nbsp;                List&lt;RepositoryEntity&gt; entity = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                entity.add(repositoryEntity.get());</b>
+<b class="nc">&nbsp;                repositoriesAddedDto = convertEntityToDTO(entity);</b>
+<b class="nc">&nbsp;                LOGGER.info(&quot;getRepositoryById : Getting the repository information {}&quot;, entity);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                LOGGER.warn(&quot;getRepositoryById: repository not found&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * updates the repository table
+&nbsp;     * 
+&nbsp;     * @param repositoryId repositoryId
+&nbsp;     * @return RepositoriesAdded dto class
+&nbsp;     */
+&nbsp;    public List&lt;RepositoriesAddedDTO&gt; updateRepository(int repositoryId) {
+<b class="nc">&nbsp;        List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto = null;</b>
+<b class="nc">&nbsp;        Optional&lt;RepositoryEntity&gt; repositoryEntities = repositoryRepository.findById(repositoryId);</b>
+<b class="nc">&nbsp;        if (repositoryEntities.isPresent()) {</b>
+<b class="nc">&nbsp;            List&lt;RepositoryEntity&gt; repositoryEntityList = repositoryEntities.stream().map(i -&gt; {</b>
+<b class="nc">&nbsp;                i.setRepositoryId(repositoryId);</b>
+<b class="nc">&nbsp;                return i;</b>
+<b class="nc">&nbsp;            }).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;            List&lt;RepositoryEntity&gt; saveEntity = repositoryEntityList.stream()</b>
+<b class="nc">&nbsp;                    .map(items -&gt; repositoryRepository.save(items)).collect(Collectors.toList());</b>
+<b class="nc">&nbsp;            repositoriesAddedDto = convertEntityToDTO(saveEntity);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * deletes the repository information
+&nbsp;     * 
+&nbsp;     * @param repositoryId repository id
+&nbsp;     * @return true or false
+&nbsp;     */
+&nbsp;    public boolean deleteRepositoryById(int repositoryId) {
+<b class="nc">&nbsp;        boolean isDeleted = false;</b>
+<b class="nc">&nbsp;        if (repositoryId != 0) {</b>
+<b class="nc">&nbsp;            repositoryRepository.deleteById(repositoryId);</b>
+<b class="nc">&nbsp;            isDeleted = true;</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;deleteRepository : Deleting the repository information {}&quot;, repositoryId);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return isDeleted;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts dto to entity during installation event
+&nbsp;     * 
+&nbsp;     * @param repositoriesAddedDto dto class
+&nbsp;     * @param userId               user id
+&nbsp;     * @return RepositoryEntity
+&nbsp;     */
+&nbsp;    private List&lt;RepositoryEntity&gt; convertDTOToEntityForInstallationEvent(
+&nbsp;            List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto, int userId) {
+&nbsp;
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; listOfRepositoryEntities = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (repositoriesAddedDto != null &amp;&amp; userId != 0) {</b>
+&nbsp;
+<b class="nc">&nbsp;            listOfRepositoryEntities = repositoriesAddedDto.stream().map(i -&gt; {</b>
+<b class="nc">&nbsp;                RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;                repositoryEntity.setRepositoryId(i.getId());</b>
+<b class="nc">&nbsp;                repositoryEntity.setRepositoryName(i.getName());</b>
+<b class="nc">&nbsp;                UserEntity userEntity = new UserEntity();</b>
+<b class="nc">&nbsp;                userEntity.setUserId(userId);</b>
+<b class="nc">&nbsp;                repositoryEntity.setUserEntity(userEntity);</b>
+<b class="nc">&nbsp;                return repositoryEntity;</b>
+<b class="nc">&nbsp;            }).collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertDTOToEntityForInstallationEvent : DTO has been converted to Entity {}&quot;,</b>
+&nbsp;                    listOfRepositoryEntities);
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertDTOToEntityForInstallationEvent : Repository list or userId value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return listOfRepositoryEntities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts dto to entity during push event
+&nbsp;     * 
+&nbsp;     * @param
+&nbsp;     * @param userID user id
+&nbsp;     * @return RepositoryEntity
+&nbsp;     */
+&nbsp;    private RepositoryEntity convertDTOToEntityForPushEvent(Integer id,String name,boolean fork, int userID,String installationId) {
+<b class="nc">&nbsp;        RepositoryEntity repositoryEntity = null;</b>
+<b class="nc">&nbsp;        if(id!=0 &amp;&amp; name!=null &amp;&amp; userID!=0 &amp;&amp; installationId!=null) {</b>
+<b class="nc">&nbsp;            repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;            repositoryEntity.setRepositoryId(id);</b>
+<b class="nc">&nbsp;            repositoryEntity.setRepositoryName(name);</b>
+<b class="nc">&nbsp;            repositoryEntity.setFork(fork);</b>
+<b class="nc">&nbsp;            UserEntity userEntity = new UserEntity();</b>
+<b class="nc">&nbsp;            userEntity.setUserId(userID);</b>
+<b class="nc">&nbsp;            repositoryEntity.setUserEntity(userEntity);</b>
+<b class="nc">&nbsp;            repositoryEntity.setInstallationId(installationId);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertDTOToEntityForPushEvent : RepositoryRepository DTO has been converted to Entity {}&quot;, repositoryEntity);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertDTOToEntityForInstallationEvent : Repository list or userId value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return repositoryEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts entity to dto during installation event
+&nbsp;     * 
+&nbsp;     * @param repositoryEntity RepositoryEntity class
+&nbsp;     * @return dto class
+&nbsp;     */
+&nbsp;    private List&lt;RepositoriesAddedDTO&gt; convertEntityToDTO(List&lt;RepositoryEntity&gt; repositoryEntity) {
+<b class="nc">&nbsp;        List&lt;RepositoriesAddedDTO&gt; listOfRepositoryAddedDTOValues = null;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (repositoryEntity != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            listOfRepositoryAddedDTOValues = repositoryEntity.stream().map(i -&gt; {</b>
+<b class="nc">&nbsp;                RepositoriesAddedDTO repositoryDto = new RepositoriesAddedDTO();</b>
+<b class="nc">&nbsp;                repositoryDto.setId(i.getRepositoryId());</b>
+<b class="nc">&nbsp;                repositoryDto.setName(i.getRepositoryName());</b>
+<b class="nc">&nbsp;                return repositoryDto;</b>
+<b class="nc">&nbsp;            }).collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertEntityToDTO : Entity has been converted to DTO {}&quot;, listOfRepositoryAddedDTOValues);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertEntityToDTO : Repository entity list is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return listOfRepositoryAddedDTOValues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * gets the repository information using userId
+&nbsp;     * 
+&nbsp;     * @param userId userId
+&nbsp;     * @return RepositoriesAdded dto class
+&nbsp;     */
+&nbsp;    public List&lt;RepositoriesAddedDTO&gt; getRepositoryFromUserId(Long userId) {
+&nbsp;        List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto;
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; repositoriesByUserId = repositoryRepository.findByUserId(userId);</b>
+<b class="nc">&nbsp;        LOGGER.info(&quot;getRepositoryFromUserId : Getting the repositories from user Id {}&quot;, repositoriesByUserId);</b>
+<b class="nc">&nbsp;        repositoriesAddedDto = convertEntityToDTO(repositoriesByUserId);</b>
+<b class="nc">&nbsp;        return repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public RepositoryResponse getRepositoryResponse(Long userId) {
+<b class="nc">&nbsp;        RepositoryResponse repositoryResponse = new RepositoryResponse();</b>
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; repositoriesByUserId = repositoryRepository.findByUserId(userId);</b>
+<b class="nc">&nbsp;        LOGGER.info(&quot;getRepositoryFromUserId : Getting the repositories from user Id {}&quot;, repositoriesByUserId);</b>
+<b class="nc">&nbsp;        if (repositoriesByUserId != null) {</b>
+<b class="nc">&nbsp;            List&lt;RepositoryMinimal&gt; reposAdded = repositoriesByUserId.stream()</b>
+<b class="nc">&nbsp;                    .filter(Objects::nonNull)</b>
+<b class="nc">&nbsp;                    .map(repo -&gt; {</b>
+<b class="nc">&nbsp;                        AnalysisDTO analysis = analysisService.getLatestAnalysis(repo.getRepositoryId());</b>
+&nbsp;                        String health;
+<b class="nc">&nbsp;                        switch((int)(analysis.getCodeSmell())){</b>
+&nbsp;                            case 2:
+&nbsp;                            case 1 :
+<b class="nc">&nbsp;                                health = &quot;A+&quot;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case 3 :
+<b class="nc">&nbsp;                                health = &quot;A&quot;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case 5:
+<b class="nc">&nbsp;                                health = &quot;B+&quot;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            case 7 :
+<b class="nc">&nbsp;                                health = &quot;B&quot;;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            default:
+<b class="nc">&nbsp;                                health = &quot;-&quot;;</b>
+&nbsp;                                break;
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        return new RepositoryMinimal(repo.getRepositoryId(), repo.getRepositoryName(),</b>
+<b class="nc">&nbsp;                                analysis.getTimestamp(),health);</b>
+&nbsp;                    })
+<b class="nc">&nbsp;                    .collect(Collectors.toList());</b>
+<b class="nc">&nbsp;            repositoryResponse.setRepositories(reposAdded);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return repositoryResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BranchService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services</a>
+</div>
+
+<h1>Coverage Summary for Class: BranchService (com.github.codergate.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BranchService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8%
+  </span>
+  <span class="absValue">
+    (2/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services;
+&nbsp;
+&nbsp;import com.github.codergate.dto.push.RepositoryDTO;
+&nbsp;import com.github.codergate.entities.BranchEntity;
+&nbsp;import com.github.codergate.entities.BranchId;
+&nbsp;import com.github.codergate.entities.RepositoryEntity;
+&nbsp;import com.github.codergate.repositories.BranchRepository;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class BranchService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    BranchRepository branchRepository;
+<b class="fc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(BranchService.class);</b>
+&nbsp;
+&nbsp;    /***
+&nbsp;     * adds branch information during push event
+&nbsp;     * @return RepositoryDTO object
+&nbsp;     */
+&nbsp;    public void addBranch(String branchesUrl, Integer repositoryId) {
+<b class="nc">&nbsp;        BranchEntity branchEntity = convertDTOToEntity(branchesUrl,repositoryId);</b>
+<b class="nc">&nbsp;            BranchEntity savedEntity = branchRepository.save(branchEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;addBranch : The branch information is added {}&quot;, savedEntity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts RepositoryDTO to Branch entity
+&nbsp;     * @return Branch entity
+&nbsp;     */
+&nbsp;    private BranchEntity convertDTOToEntity(String branchesUrl, Integer repositoryId) {
+<b class="nc">&nbsp;        BranchEntity branchEntity = null;</b>
+<b class="nc">&nbsp;            branchEntity = new BranchEntity();</b>
+<b class="nc">&nbsp;            BranchId branchId = new BranchId(repositoryId, branchesUrl);</b>
+<b class="nc">&nbsp;            RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;            repositoryEntity.setRepositoryId(repositoryId);</b>
+<b class="nc">&nbsp;            branchEntity.setBranchId(branchId);</b>
+<b class="nc">&nbsp;            branchEntity.setRepositoryIdInBranch(repositoryEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertDTOToEntity : Repository DTO has been converted to Branch Entity {}&quot;, branchEntity);</b>
+<b class="nc">&nbsp;        return branchEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts Branch entity to RepositoryDTO
+&nbsp;     * 
+&nbsp;     * @param branch Branch entity
+&nbsp;     * @return RepositoryDTO object
+&nbsp;     */
+&nbsp;    private RepositoryDTO convertEntityToDto(BranchEntity branch) {
+<b class="nc">&nbsp;        RepositoryDTO repositoryDTO = null;</b>
+<b class="nc">&nbsp;        if (branch != null) {</b>
+<b class="nc">&nbsp;            repositoryDTO = new RepositoryDTO();</b>
+<b class="nc">&nbsp;            if (branch.getBranchId() != null) {</b>
+<b class="nc">&nbsp;                BranchId branchIdObject = branch.getBranchId();</b>
+<b class="nc">&nbsp;                repositoryDTO.setId(branchIdObject.getRepositoryId());</b>
+<b class="nc">&nbsp;                repositoryDTO.setBranchesUrl(branchIdObject.getBranchUrl());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertEntityToDto : Branch Entity has been converted to RepositoryDTO {}&quot;, repositoryDTO);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertEntityToDto : Branch Entity value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return repositoryDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;String&gt; getBranchesByRepoId(String repoId){
+<b class="nc">&nbsp;        return branchRepository.findByRepoId(Integer.parseInt(repoId) );</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

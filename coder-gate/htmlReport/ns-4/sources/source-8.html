@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Entity</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.analysis</a>
+</div>
+
+<h1>Coverage Summary for Class: Entity (com.github.codergate.dto.analysis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Entity</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.analysis;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;Component&quot;,
+&nbsp;    &quot;Class&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class Entity implements Serializable</b>
+&nbsp;{
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Component&quot;)
+&nbsp;    private String component;
+&nbsp;    @JsonProperty(&quot;Class&quot;)
+&nbsp;    private String _class;
+&nbsp;    private final static long serialVersionUID = -8756173815302451950L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Component&quot;)
+&nbsp;    public String getComponent() {
+<b class="nc">&nbsp;        return component;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Component&quot;)
+&nbsp;    public void setComponent(String component) {
+<b class="nc">&nbsp;        this.component = component;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Class&quot;)
+&nbsp;    public String getClass_() {
+<b class="nc">&nbsp;        return _class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Class&quot;)
+&nbsp;    public void setClass_(String _class) {
+<b class="nc">&nbsp;        this._class = _class;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,369 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > User</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.pullRequest</a>
+</div>
+
+<h1>Coverage Summary for Class: User (com.github.codergate.dto.pullRequest)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.pullRequest;
+&nbsp;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnyGetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnySetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;login&quot;,
+&nbsp;    &quot;id&quot;,
+&nbsp;    &quot;node_id&quot;,
+&nbsp;    &quot;avatar_url&quot;,
+&nbsp;    &quot;gravatar_id&quot;,
+&nbsp;    &quot;url&quot;,
+&nbsp;    &quot;html_url&quot;,
+&nbsp;    &quot;followers_url&quot;,
+&nbsp;    &quot;following_url&quot;,
+&nbsp;    &quot;gists_url&quot;,
+&nbsp;    &quot;starred_url&quot;,
+&nbsp;    &quot;subscriptions_url&quot;,
+&nbsp;    &quot;organizations_url&quot;,
+&nbsp;    &quot;repos_url&quot;,
+&nbsp;    &quot;events_url&quot;,
+&nbsp;    &quot;received_events_url&quot;,
+&nbsp;    &quot;type&quot;,
+&nbsp;    &quot;site_admin&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class User {</b>
+&nbsp;
+&nbsp;    @JsonProperty(&quot;login&quot;)
+&nbsp;    private String login;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    private Integer id;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    private String nodeId;
+&nbsp;    @JsonProperty(&quot;avatar_url&quot;)
+&nbsp;    private String avatarUrl;
+&nbsp;    @JsonProperty(&quot;gravatar_id&quot;)
+&nbsp;    private String gravatarId;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    private String url;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    private String htmlUrl;
+&nbsp;    @JsonProperty(&quot;followers_url&quot;)
+&nbsp;    private String followersUrl;
+&nbsp;    @JsonProperty(&quot;following_url&quot;)
+&nbsp;    private String followingUrl;
+&nbsp;    @JsonProperty(&quot;gists_url&quot;)
+&nbsp;    private String gistsUrl;
+&nbsp;    @JsonProperty(&quot;starred_url&quot;)
+&nbsp;    private String starredUrl;
+&nbsp;    @JsonProperty(&quot;subscriptions_url&quot;)
+&nbsp;    private String subscriptionsUrl;
+&nbsp;    @JsonProperty(&quot;organizations_url&quot;)
+&nbsp;    private String organizationsUrl;
+&nbsp;    @JsonProperty(&quot;repos_url&quot;)
+&nbsp;    private String reposUrl;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    private String eventsUrl;
+&nbsp;    @JsonProperty(&quot;received_events_url&quot;)
+&nbsp;    private String receivedEventsUrl;
+&nbsp;    @JsonProperty(&quot;type&quot;)
+&nbsp;    private String type;
+&nbsp;    @JsonProperty(&quot;site_admin&quot;)
+&nbsp;    private Boolean siteAdmin;
+<b class="nc">&nbsp;    @JsonIgnore</b>
+&nbsp;    private Map&lt;String, Object&gt; additionalProperties = new LinkedHashMap&lt;String, Object&gt;();
+&nbsp;
+&nbsp;    @JsonProperty(&quot;login&quot;)
+&nbsp;    public String getLogin() {
+<b class="nc">&nbsp;        return login;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;login&quot;)
+&nbsp;    public void setLogin(String login) {
+<b class="nc">&nbsp;        this.login = login;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public Integer getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public void setId(Integer id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    public String getNodeId() {
+<b class="nc">&nbsp;        return nodeId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    public void setNodeId(String nodeId) {
+<b class="nc">&nbsp;        this.nodeId = nodeId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;avatar_url&quot;)
+&nbsp;    public String getAvatarUrl() {
+<b class="nc">&nbsp;        return avatarUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;avatar_url&quot;)
+&nbsp;    public void setAvatarUrl(String avatarUrl) {
+<b class="nc">&nbsp;        this.avatarUrl = avatarUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;gravatar_id&quot;)
+&nbsp;    public String getGravatarId() {
+<b class="nc">&nbsp;        return gravatarId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;gravatar_id&quot;)
+&nbsp;    public void setGravatarId(String gravatarId) {
+<b class="nc">&nbsp;        this.gravatarId = gravatarId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    public String getUrl() {
+<b class="nc">&nbsp;        return url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    public void setUrl(String url) {
+<b class="nc">&nbsp;        this.url = url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public String getHtmlUrl() {
+<b class="nc">&nbsp;        return htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public void setHtmlUrl(String htmlUrl) {
+<b class="nc">&nbsp;        this.htmlUrl = htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;followers_url&quot;)
+&nbsp;    public String getFollowersUrl() {
+<b class="nc">&nbsp;        return followersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;followers_url&quot;)
+&nbsp;    public void setFollowersUrl(String followersUrl) {
+<b class="nc">&nbsp;        this.followersUrl = followersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;following_url&quot;)
+&nbsp;    public String getFollowingUrl() {
+<b class="nc">&nbsp;        return followingUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;following_url&quot;)
+&nbsp;    public void setFollowingUrl(String followingUrl) {
+<b class="nc">&nbsp;        this.followingUrl = followingUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;gists_url&quot;)
+&nbsp;    public String getGistsUrl() {
+<b class="nc">&nbsp;        return gistsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;gists_url&quot;)
+&nbsp;    public void setGistsUrl(String gistsUrl) {
+<b class="nc">&nbsp;        this.gistsUrl = gistsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;starred_url&quot;)
+&nbsp;    public String getStarredUrl() {
+<b class="nc">&nbsp;        return starredUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;starred_url&quot;)
+&nbsp;    public void setStarredUrl(String starredUrl) {
+<b class="nc">&nbsp;        this.starredUrl = starredUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscriptions_url&quot;)
+&nbsp;    public String getSubscriptionsUrl() {
+<b class="nc">&nbsp;        return subscriptionsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscriptions_url&quot;)
+&nbsp;    public void setSubscriptionsUrl(String subscriptionsUrl) {
+<b class="nc">&nbsp;        this.subscriptionsUrl = subscriptionsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;organizations_url&quot;)
+&nbsp;    public String getOrganizationsUrl() {
+<b class="nc">&nbsp;        return organizationsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;organizations_url&quot;)
+&nbsp;    public void setOrganizationsUrl(String organizationsUrl) {
+<b class="nc">&nbsp;        this.organizationsUrl = organizationsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repos_url&quot;)
+&nbsp;    public String getReposUrl() {
+<b class="nc">&nbsp;        return reposUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repos_url&quot;)
+&nbsp;    public void setReposUrl(String reposUrl) {
+<b class="nc">&nbsp;        this.reposUrl = reposUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    public String getEventsUrl() {
+<b class="nc">&nbsp;        return eventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    public void setEventsUrl(String eventsUrl) {
+<b class="nc">&nbsp;        this.eventsUrl = eventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;received_events_url&quot;)
+&nbsp;    public String getReceivedEventsUrl() {
+<b class="nc">&nbsp;        return receivedEventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;received_events_url&quot;)
+&nbsp;    public void setReceivedEventsUrl(String receivedEventsUrl) {
+<b class="nc">&nbsp;        this.receivedEventsUrl = receivedEventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;type&quot;)
+&nbsp;    public String getType() {
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;type&quot;)
+&nbsp;    public void setType(String type) {
+<b class="nc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;site_admin&quot;)
+&nbsp;    public Boolean getSiteAdmin() {
+<b class="nc">&nbsp;        return siteAdmin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;site_admin&quot;)
+&nbsp;    public void setSiteAdmin(Boolean siteAdmin) {
+<b class="nc">&nbsp;        this.siteAdmin = siteAdmin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnyGetter
+&nbsp;    public Map&lt;String, Object&gt; getAdditionalProperties() {
+<b class="nc">&nbsp;        return this.additionalProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnySetter
+&nbsp;    public void setAdditionalProperty(String name, Object value) {
+<b class="nc">&nbsp;        this.additionalProperties.put(name, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

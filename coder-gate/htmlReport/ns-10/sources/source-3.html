@@ -1,0 +1,91 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnalysisRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: AnalysisRepository (com.github.codergate.repositories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AnalysisRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.repositories;
+&nbsp;
+&nbsp;import com.github.codergate.entities.AnalysisEntity;
+&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface AnalysisRepository extends JpaRepository&lt;AnalysisEntity, Integer&gt; {
+&nbsp;    @Query(value = &quot;SELECT * FROM analysis a WHERE a.repository_id =:repositoryId&quot;, nativeQuery = true)
+&nbsp;    AnalysisEntity findAnalysisByRepositoryId(@Param(&quot;repositoryId&quot;) Integer repositoryId);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT * FROM analysis a WHERE a.repository_id =:repositoryID AND a.timestamp = (SELECT MAX(a.timestamp) FROM analysis a WHERE a.repository_id =:repositoryID)&quot;, nativeQuery = true)
+&nbsp;    AnalysisEntity findLatestAnalysisByRepositoryId(@Param(&quot;repositoryID&quot;) int repositoryId);
+&nbsp;    @Query(value = &quot;SELECT * FROM analysis a WHERE a.repository_id =:repositoryID AND a.branch_id = :branchId and a.timestamp = (SELECT MAX(a.timestamp) FROM analysis a WHERE a.repository_id =:repositoryID AND a.branch_id = :branchId )&quot;, nativeQuery = true)
+&nbsp;    AnalysisEntity findLatestAnalysisByRepositoryIdAndBranchId(@Param(&quot;repositoryID&quot;) int repositoryId,@Param(&quot;branchId&quot;) String branchId);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT * FROM analysis a WHERE a.repository_id = :repositoryID and a.branch_Id = :branchId &quot;, nativeQuery = true)
+&nbsp;    List&lt;AnalysisEntity&gt; findAnalysisByRepositoryAndBranchId(@Param(&quot;repositoryID&quot;) int repositoryId, @Param(&quot;branchId&quot;) String branchId);
+&nbsp;    @Query(value = &quot;SELECT count(*) FROM analysis a WHERE a.repository_id = :repositoryID &quot;, nativeQuery = true)
+&nbsp;    Integer findCodeScansOfRepository(@Param(&quot;repositoryID&quot;) int repositoryId);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

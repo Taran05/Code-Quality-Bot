@@ -1,0 +1,135 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DesignSmells</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.analysis</a>
+</div>
+
+<h1>Coverage Summary for Class: DesignSmells (com.github.codergate.dto.analysis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DesignSmells</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.analysis;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;DesignSmell&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class DesignSmells implements Serializable</b>
+&nbsp;{
+&nbsp;
+&nbsp;    @JsonProperty(&quot;DesignSmell&quot;)
+&nbsp;    private List&lt;DesignSmell&gt; designSmell;
+&nbsp;    private final static long serialVersionUID = -2719394590228221177L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;DesignSmell&quot;)
+&nbsp;    public List&lt;DesignSmell&gt; getDesignSmell() {
+<b class="nc">&nbsp;        return designSmell;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;DesignSmell&quot;)
+&nbsp;    public void setDesignSmell(List&lt;DesignSmell&gt; designSmell) {
+<b class="nc">&nbsp;        this.designSmell = designSmell;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

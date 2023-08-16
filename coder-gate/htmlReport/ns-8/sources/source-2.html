@@ -1,0 +1,441 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Installation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.installation</a>
+</div>
+
+<h1>Coverage Summary for Class: Installation (com.github.codergate.dto.installation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Installation</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.installation;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+<b class="nc">&nbsp;public class Installation implements Serializable {</b>
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    private Integer id;
+&nbsp;    @JsonProperty(&quot;account&quot;)
+&nbsp;    private AccountDTO accountDto;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    private String repositorySelection;
+&nbsp;    @JsonProperty(&quot;access_tokens_url&quot;)
+&nbsp;    private String accessTokensUrl;
+&nbsp;    @JsonProperty(&quot;repositories_url&quot;)
+&nbsp;    private String repositoriesUrl;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    private String htmlUrl;
+&nbsp;    @JsonProperty(&quot;app_id&quot;)
+&nbsp;    private Integer appId;
+&nbsp;    @JsonProperty(&quot;app_slug&quot;)
+&nbsp;    private String appSlug;
+&nbsp;    @JsonProperty(&quot;target_id&quot;)
+&nbsp;    private Integer targetId;
+&nbsp;    @JsonProperty(&quot;target_type&quot;)
+&nbsp;    private String targetType;
+&nbsp;    @JsonProperty(&quot;permissions&quot;)
+&nbsp;    private Permissions permissions;
+&nbsp;    @JsonProperty(&quot;events&quot;)
+&nbsp;    private List&lt;String&gt; events;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    private String createdAt;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    private String updatedAt;
+&nbsp;    @JsonProperty(&quot;single_file_name&quot;)
+&nbsp;    private Object singleFileName;
+&nbsp;    @JsonProperty(&quot;has_multiple_single_files&quot;)
+&nbsp;    private Boolean hasMultipleSingleFiles;
+&nbsp;    @JsonProperty(&quot;single_file_paths&quot;)
+&nbsp;    private List&lt;Object&gt; singleFilePaths;
+&nbsp;    @JsonProperty(&quot;suspended_by&quot;)
+&nbsp;    private Object suspendedBy;
+&nbsp;    @JsonProperty(&quot;suspended_at&quot;)
+&nbsp;    private Object suspendedAt;
+&nbsp;    private static final long serialVersionUID = -4502662394749074220L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public Integer getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public void setId(Integer id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withId(Integer id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;account&quot;)
+&nbsp;    public AccountDTO getAccount() {
+<b class="nc">&nbsp;        return accountDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;account&quot;)
+&nbsp;    public void setAccount(AccountDTO accountDto) {
+<b class="nc">&nbsp;        this.accountDto = accountDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withAccount(AccountDTO accountDto) {
+<b class="nc">&nbsp;        this.accountDto = accountDto;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    public String getRepositorySelection() {
+<b class="nc">&nbsp;        return repositorySelection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    public void setRepositorySelection(String repositorySelection) {
+<b class="nc">&nbsp;        this.repositorySelection = repositorySelection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withRepositorySelection(String repositorySelection) {
+<b class="nc">&nbsp;        this.repositorySelection = repositorySelection;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;access_tokens_url&quot;)
+&nbsp;    public String getAccessTokensUrl() {
+<b class="nc">&nbsp;        return accessTokensUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;access_tokens_url&quot;)
+&nbsp;    public void setAccessTokensUrl(String accessTokensUrl) {
+<b class="nc">&nbsp;        this.accessTokensUrl = accessTokensUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withAccessTokensUrl(String accessTokensUrl) {
+<b class="nc">&nbsp;        this.accessTokensUrl = accessTokensUrl;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_url&quot;)
+&nbsp;    public String getRepositoriesUrl() {
+<b class="nc">&nbsp;        return repositoriesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_url&quot;)
+&nbsp;    public void setRepositoriesUrl(String repositoriesUrl) {
+<b class="nc">&nbsp;        this.repositoriesUrl = repositoriesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withRepositoriesUrl(String repositoriesUrl) {
+<b class="nc">&nbsp;        this.repositoriesUrl = repositoriesUrl;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public String getHtmlUrl() {
+<b class="nc">&nbsp;        return htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public void setHtmlUrl(String htmlUrl) {
+<b class="nc">&nbsp;        this.htmlUrl = htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withHtmlUrl(String htmlUrl) {
+<b class="nc">&nbsp;        this.htmlUrl = htmlUrl;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;app_id&quot;)
+&nbsp;    public Integer getAppId() {
+<b class="nc">&nbsp;        return appId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;app_id&quot;)
+&nbsp;    public void setAppId(Integer appId) {
+<b class="nc">&nbsp;        this.appId = appId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withAppId(Integer appId) {
+<b class="nc">&nbsp;        this.appId = appId;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;app_slug&quot;)
+&nbsp;    public String getAppSlug() {
+<b class="nc">&nbsp;        return appSlug;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;app_slug&quot;)
+&nbsp;    public void setAppSlug(String appSlug) {
+<b class="nc">&nbsp;        this.appSlug = appSlug;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withAppSlug(String appSlug) {
+<b class="nc">&nbsp;        this.appSlug = appSlug;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;target_id&quot;)
+&nbsp;    public Integer getTargetId() {
+<b class="nc">&nbsp;        return targetId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;target_id&quot;)
+&nbsp;    public void setTargetId(Integer targetId) {
+<b class="nc">&nbsp;        this.targetId = targetId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withTargetId(Integer targetId) {
+<b class="nc">&nbsp;        this.targetId = targetId;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;target_type&quot;)
+&nbsp;    public String getTargetType() {
+<b class="nc">&nbsp;        return targetType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;target_type&quot;)
+&nbsp;    public void setTargetType(String targetType) {
+<b class="nc">&nbsp;        this.targetType = targetType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withTargetType(String targetType) {
+<b class="nc">&nbsp;        this.targetType = targetType;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;permissions&quot;)
+&nbsp;    public Permissions getPermissions() {
+<b class="nc">&nbsp;        return permissions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;permissions&quot;)
+&nbsp;    public void setPermissions(Permissions permissions) {
+<b class="nc">&nbsp;        this.permissions = permissions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withPermissions(Permissions permissions) {
+<b class="nc">&nbsp;        this.permissions = permissions;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events&quot;)
+&nbsp;    public List&lt;String&gt; getEvents() {
+<b class="nc">&nbsp;        return events;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events&quot;)
+&nbsp;    public void setEvents(List&lt;String&gt; events) {
+<b class="nc">&nbsp;        this.events = events;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withEvents(List&lt;String&gt; events) {
+<b class="nc">&nbsp;        this.events = events;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    public String getCreatedAt() {
+<b class="nc">&nbsp;        return createdAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    public void setCreatedAt(String createdAt) {
+<b class="nc">&nbsp;        this.createdAt = createdAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withCreatedAt(String createdAt) {
+<b class="nc">&nbsp;        this.createdAt = createdAt;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    public String getUpdatedAt() {
+<b class="nc">&nbsp;        return updatedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    public void setUpdatedAt(String updatedAt) {
+<b class="nc">&nbsp;        this.updatedAt = updatedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withUpdatedAt(String updatedAt) {
+<b class="nc">&nbsp;        this.updatedAt = updatedAt;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;single_file_name&quot;)
+&nbsp;    public Object getSingleFileName() {
+<b class="nc">&nbsp;        return singleFileName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;single_file_name&quot;)
+&nbsp;    public void setSingleFileName(Object singleFileName) {
+<b class="nc">&nbsp;        this.singleFileName = singleFileName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withSingleFileName(Object singleFileName) {
+<b class="nc">&nbsp;        this.singleFileName = singleFileName;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_multiple_single_files&quot;)
+&nbsp;    public Boolean getHasMultipleSingleFiles() {
+<b class="nc">&nbsp;        return hasMultipleSingleFiles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_multiple_single_files&quot;)
+&nbsp;    public void setHasMultipleSingleFiles(Boolean hasMultipleSingleFiles) {
+<b class="nc">&nbsp;        this.hasMultipleSingleFiles = hasMultipleSingleFiles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withHasMultipleSingleFiles(Boolean hasMultipleSingleFiles) {
+<b class="nc">&nbsp;        this.hasMultipleSingleFiles = hasMultipleSingleFiles;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;single_file_paths&quot;)
+&nbsp;    public List&lt;Object&gt; getSingleFilePaths() {
+<b class="nc">&nbsp;        return singleFilePaths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;single_file_paths&quot;)
+&nbsp;    public void setSingleFilePaths(List&lt;Object&gt; singleFilePaths) {
+<b class="nc">&nbsp;        this.singleFilePaths = singleFilePaths;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withSingleFilePaths(List&lt;Object&gt; singleFilePaths) {
+<b class="nc">&nbsp;        this.singleFilePaths = singleFilePaths;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;suspended_by&quot;)
+&nbsp;    public Object getSuspendedBy() {
+<b class="nc">&nbsp;        return suspendedBy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;suspended_by&quot;)
+&nbsp;    public void setSuspendedBy(Object suspendedBy) {
+<b class="nc">&nbsp;        this.suspendedBy = suspendedBy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withSuspendedBy(Object suspendedBy) {
+<b class="nc">&nbsp;        this.suspendedBy = suspendedBy;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;suspended_at&quot;)
+&nbsp;    public Object getSuspendedAt() {
+<b class="nc">&nbsp;        return suspendedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;suspended_at&quot;)
+&nbsp;    public void setSuspendedAt(Object suspendedAt) {
+<b class="nc">&nbsp;        this.suspendedAt = suspendedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Installation withSuspendedAt(Object suspendedAt) {
+<b class="nc">&nbsp;        this.suspendedAt = suspendedAt;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

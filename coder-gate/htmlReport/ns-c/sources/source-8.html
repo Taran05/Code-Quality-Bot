@@ -1,0 +1,351 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ThresholdEntity</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: ThresholdEntity (com.github.codergate.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ThresholdEntity</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/46)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ThresholdEntity$HibernateProxy$InhhLyit</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/46)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.entities;
+&nbsp;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.JoinColumn;
+&nbsp;import javax.persistence.OneToOne;
+&nbsp;import javax.persistence.Table;
+&nbsp;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Getter;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;import lombok.Setter;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Threshold&quot;)
+&nbsp;@Getter
+&nbsp;@Setter
+<b class="fc">&nbsp;@NoArgsConstructor</b>
+<b class="nc">&nbsp;@AllArgsConstructor</b>
+&nbsp;public class ThresholdEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private int thresholdId;
+&nbsp;
+&nbsp;    @OneToOne
+&nbsp;    @JoinColumn(name = &quot;repositoryId&quot;)
+&nbsp;
+&nbsp;    private RepositoryEntity repositoryIdInThreshold;
+&nbsp;    private int bugs;
+&nbsp;    private int vulnerabilities;
+&nbsp;    private double codeSmell;
+&nbsp;    private double testCoverage;
+&nbsp;    private double duplicatedLines;
+&nbsp;    private double cyclomaticComplexity;
+&nbsp;    private double documentedLines;
+&nbsp;
+&nbsp;    // Architecture Smells
+&nbsp;    private int cyclicDependency;
+&nbsp;    private int godComponents;
+&nbsp;
+&nbsp;    // Design Smells
+&nbsp;    private int cycDependentMod;
+&nbsp;    private int insufficientModularization;
+&nbsp;    private int unnecessaryAbstraction;
+&nbsp;
+&nbsp;    // Implementation Smells
+&nbsp;    private int complexConditional;
+&nbsp;    private int emptyCatchClause;
+&nbsp;
+&nbsp;    // Test Smells
+&nbsp;    private int missingAssertion;
+&nbsp;    private int emptyTest;
+&nbsp;
+&nbsp;    // Densities
+&nbsp;    private double archSmellDensity;
+&nbsp;    private double designSmellDensity;
+&nbsp;    private double impSmellDensity;
+&nbsp;    private boolean allowAction;
+&nbsp;
+&nbsp;    public int getThresholdId() {
+<b class="nc">&nbsp;        return thresholdId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setThresholdId(int thresholdId) {
+<b class="nc">&nbsp;        this.thresholdId = thresholdId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public RepositoryEntity getRepositoryIdInThreshold() {
+<b class="nc">&nbsp;        return repositoryIdInThreshold;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRepositoryIdInThreshold(RepositoryEntity repositoryIdInThreshold) {
+<b class="nc">&nbsp;        this.repositoryIdInThreshold = repositoryIdInThreshold;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getBugs() {
+<b class="nc">&nbsp;        return bugs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBugs(int bugs) {
+<b class="nc">&nbsp;        this.bugs = bugs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getVulnerabilities() {
+<b class="nc">&nbsp;        return vulnerabilities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVulnerabilities(int vulnerabilities) {
+<b class="nc">&nbsp;        this.vulnerabilities = vulnerabilities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getCodeSmell() {
+<b class="nc">&nbsp;        return codeSmell;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCodeSmell(double codeSmell) {
+<b class="nc">&nbsp;        this.codeSmell = codeSmell;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getTestCoverage() {
+<b class="nc">&nbsp;        return testCoverage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTestCoverage(double testCoverage) {
+<b class="nc">&nbsp;        this.testCoverage = testCoverage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getDuplicatedLines() {
+<b class="nc">&nbsp;        return duplicatedLines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDuplicatedLines(double duplicatedLines) {
+<b class="nc">&nbsp;        this.duplicatedLines = duplicatedLines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getCyclomaticComplexity() {
+<b class="nc">&nbsp;        return cyclomaticComplexity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCyclomaticComplexity(double cyclomaticComplexity) {
+<b class="nc">&nbsp;        this.cyclomaticComplexity = cyclomaticComplexity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getDocumentedLines() {
+<b class="nc">&nbsp;        return documentedLines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDocumentedLines(double documentedLines) {
+<b class="nc">&nbsp;        this.documentedLines = documentedLines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getCyclicDependency() {
+<b class="nc">&nbsp;        return cyclicDependency;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCyclicDependency(int cyclicDependency) {
+<b class="nc">&nbsp;        this.cyclicDependency = cyclicDependency;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getGodComponents() {
+<b class="nc">&nbsp;        return godComponents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setGodComponents(int godComponents) {
+<b class="nc">&nbsp;        this.godComponents = godComponents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getCycDependentMod() {
+<b class="nc">&nbsp;        return cycDependentMod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCycDependentMod(int cycDependentMod) {
+<b class="nc">&nbsp;        this.cycDependentMod = cycDependentMod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getInsufficientModularization() {
+<b class="nc">&nbsp;        return insufficientModularization;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInsufficientModularization(int insufficientModularization) {
+<b class="nc">&nbsp;        this.insufficientModularization = insufficientModularization;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getUnnecessaryAbstraction() {
+<b class="nc">&nbsp;        return unnecessaryAbstraction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUnnecessaryAbstraction(int unnecessaryAbstraction) {
+<b class="nc">&nbsp;        this.unnecessaryAbstraction = unnecessaryAbstraction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getComplexConditional() {
+<b class="nc">&nbsp;        return complexConditional;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setComplexConditional(int complexConditional) {
+<b class="nc">&nbsp;        this.complexConditional = complexConditional;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getEmptyCatchClause() {
+<b class="nc">&nbsp;        return emptyCatchClause;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmptyCatchClause(int emptyCatchClause) {
+<b class="nc">&nbsp;        this.emptyCatchClause = emptyCatchClause;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMissingAssertion() {
+<b class="nc">&nbsp;        return missingAssertion;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMissingAssertion(int missingAssertion) {
+<b class="nc">&nbsp;        this.missingAssertion = missingAssertion;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getEmptyTest() {
+<b class="nc">&nbsp;        return emptyTest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmptyTest(int emptyTest) {
+<b class="nc">&nbsp;        this.emptyTest = emptyTest;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getArchSmellDensity() {
+<b class="nc">&nbsp;        return archSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setArchSmellDensity(double archSmellDensity) {
+<b class="nc">&nbsp;        this.archSmellDensity = archSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getDesignSmellDensity() {
+<b class="nc">&nbsp;        return designSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDesignSmellDensity(double designSmellDensity) {
+<b class="nc">&nbsp;        this.designSmellDensity = designSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getImpSmellDensity() {
+<b class="nc">&nbsp;        return impSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setImpSmellDensity(double impSmellDensity) {
+<b class="nc">&nbsp;        this.impSmellDensity = impSmellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAllowAction() {
+<b class="nc">&nbsp;        return allowAction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAllowAction(boolean allowAction) {
+<b class="nc">&nbsp;        this.allowAction = allowAction;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

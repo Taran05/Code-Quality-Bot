@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RepositoryEntity</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: RepositoryEntity (com.github.codergate.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RepositoryEntity</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RepositoryEntity$HibernateProxy$4SfzWyCW</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.entities;
+&nbsp;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Getter;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;import lombok.Setter;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;repository&quot;)
+&nbsp;@Getter
+&nbsp;@Setter
+<b class="nc">&nbsp;@NoArgsConstructor</b>
+<b class="nc">&nbsp;@AllArgsConstructor</b>
+&nbsp;public class RepositoryEntity {
+&nbsp;    @Id
+&nbsp;    private int repositoryId;
+&nbsp;    private String repositoryName;
+&nbsp;    private boolean fork;
+&nbsp;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;userId&quot;)
+&nbsp;    private UserEntity userEntity;
+&nbsp;
+<b class="nc">&nbsp;    @OneToMany(mappedBy = &quot;repositoryIdInBranch&quot;, cascade = CascadeType.ALL)</b>
+&nbsp;    private List&lt;BranchEntity&gt; branchEntities = new ArrayList&lt;&gt;();
+&nbsp;
+<b class="nc">&nbsp;    @OneToMany(mappedBy = &quot;repositoryIdInTag&quot;, cascade = CascadeType.ALL)</b>
+&nbsp;    private List&lt;TagEntity&gt; tagEntities = new ArrayList&lt;&gt;();
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;repositoryIdInEvent&quot;, cascade = CascadeType.ALL)
+&nbsp;    private Set&lt;EventEntity&gt; eventAndRepository;
+&nbsp;
+&nbsp;    @OneToOne(mappedBy = &quot;repositoryIdInThreshold&quot;)
+&nbsp;    private ThresholdEntity thresholdAndRepository;
+&nbsp;
+&nbsp;    private String installationId;
+&nbsp;
+&nbsp;    public int getRepositoryId() {
+<b class="nc">&nbsp;        return repositoryId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRepositoryId(int repositoryId) {
+<b class="nc">&nbsp;        this.repositoryId = repositoryId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getRepositoryName() {
+<b class="nc">&nbsp;        return repositoryName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setRepositoryName(String repositoryName) {
+<b class="nc">&nbsp;        this.repositoryName = repositoryName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isFork() {
+<b class="nc">&nbsp;        return fork;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFork(boolean fork) {
+<b class="nc">&nbsp;        this.fork = fork;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public UserEntity getUserEntity() {
+<b class="nc">&nbsp;        return userEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUserEntity(UserEntity userEntity) {
+<b class="nc">&nbsp;        this.userEntity = userEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;BranchEntity&gt; getBranchEntities() {
+<b class="nc">&nbsp;        return branchEntities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBranchEntities(List&lt;BranchEntity&gt; branchEntities) {
+<b class="nc">&nbsp;        this.branchEntities = branchEntities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;TagEntity&gt; getTagEntities() {
+<b class="nc">&nbsp;        return tagEntities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTagEntities(List&lt;TagEntity&gt; tagEntities) {
+<b class="nc">&nbsp;        this.tagEntities = tagEntities;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;EventEntity&gt; getEventAndRepository() {
+<b class="nc">&nbsp;        return eventAndRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEventAndRepository(Set&lt;EventEntity&gt; eventAndRepository) {
+<b class="nc">&nbsp;        this.eventAndRepository = eventAndRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ThresholdEntity getThresholdAndRepository() {
+<b class="nc">&nbsp;        return thresholdAndRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setThresholdAndRepository(ThresholdEntity thresholdAndRepository) {
+<b class="nc">&nbsp;        this.thresholdAndRepository = thresholdAndRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getInstallationId() {
+<b class="nc">&nbsp;        return installationId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInstallationId(String installationId) {
+<b class="nc">&nbsp;        this.installationId = installationId;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

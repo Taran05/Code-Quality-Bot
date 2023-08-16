@@ -1,0 +1,1163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Repository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.pullRequest</a>
+</div>
+
+<h1>Coverage Summary for Class: Repository (com.github.codergate.dto.pullRequest)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Repository</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/161)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/162)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.pullRequest;
+&nbsp;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnyGetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnySetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;id&quot;,
+&nbsp;    &quot;node_id&quot;,
+&nbsp;    &quot;name&quot;,
+&nbsp;    &quot;full_name&quot;,
+&nbsp;    &quot;private&quot;,
+&nbsp;    &quot;owner&quot;,
+&nbsp;    &quot;html_url&quot;,
+&nbsp;    &quot;description&quot;,
+&nbsp;    &quot;fork&quot;,
+&nbsp;    &quot;url&quot;,
+&nbsp;    &quot;forks_url&quot;,
+&nbsp;    &quot;keys_url&quot;,
+&nbsp;    &quot;collaborators_url&quot;,
+&nbsp;    &quot;teams_url&quot;,
+&nbsp;    &quot;hooks_url&quot;,
+&nbsp;    &quot;issue_events_url&quot;,
+&nbsp;    &quot;events_url&quot;,
+&nbsp;    &quot;assignees_url&quot;,
+&nbsp;    &quot;branches_url&quot;,
+&nbsp;    &quot;tags_url&quot;,
+&nbsp;    &quot;blobs_url&quot;,
+&nbsp;    &quot;git_tags_url&quot;,
+&nbsp;    &quot;git_refs_url&quot;,
+&nbsp;    &quot;trees_url&quot;,
+&nbsp;    &quot;statuses_url&quot;,
+&nbsp;    &quot;languages_url&quot;,
+&nbsp;    &quot;stargazers_url&quot;,
+&nbsp;    &quot;contributors_url&quot;,
+&nbsp;    &quot;subscribers_url&quot;,
+&nbsp;    &quot;subscription_url&quot;,
+&nbsp;    &quot;commits_url&quot;,
+&nbsp;    &quot;git_commits_url&quot;,
+&nbsp;    &quot;comments_url&quot;,
+&nbsp;    &quot;issue_comment_url&quot;,
+&nbsp;    &quot;contents_url&quot;,
+&nbsp;    &quot;compare_url&quot;,
+&nbsp;    &quot;merges_url&quot;,
+&nbsp;    &quot;archive_url&quot;,
+&nbsp;    &quot;downloads_url&quot;,
+&nbsp;    &quot;issues_url&quot;,
+&nbsp;    &quot;pulls_url&quot;,
+&nbsp;    &quot;milestones_url&quot;,
+&nbsp;    &quot;notifications_url&quot;,
+&nbsp;    &quot;labels_url&quot;,
+&nbsp;    &quot;releases_url&quot;,
+&nbsp;    &quot;deployments_url&quot;,
+&nbsp;    &quot;created_at&quot;,
+&nbsp;    &quot;updated_at&quot;,
+&nbsp;    &quot;pushed_at&quot;,
+&nbsp;    &quot;git_url&quot;,
+&nbsp;    &quot;ssh_url&quot;,
+&nbsp;    &quot;clone_url&quot;,
+&nbsp;    &quot;svn_url&quot;,
+&nbsp;    &quot;homepage&quot;,
+&nbsp;    &quot;size&quot;,
+&nbsp;    &quot;stargazers_count&quot;,
+&nbsp;    &quot;watchers_count&quot;,
+&nbsp;    &quot;language&quot;,
+&nbsp;    &quot;has_issues&quot;,
+&nbsp;    &quot;has_projects&quot;,
+&nbsp;    &quot;has_downloads&quot;,
+&nbsp;    &quot;has_wiki&quot;,
+&nbsp;    &quot;has_pages&quot;,
+&nbsp;    &quot;has_discussions&quot;,
+&nbsp;    &quot;forks_count&quot;,
+&nbsp;    &quot;mirror_url&quot;,
+&nbsp;    &quot;archived&quot;,
+&nbsp;    &quot;disabled&quot;,
+&nbsp;    &quot;open_issues_count&quot;,
+&nbsp;    &quot;license&quot;,
+&nbsp;    &quot;allow_forking&quot;,
+&nbsp;    &quot;is_template&quot;,
+&nbsp;    &quot;web_commit_signoff_required&quot;,
+&nbsp;    &quot;topics&quot;,
+&nbsp;    &quot;visibility&quot;,
+&nbsp;    &quot;forks&quot;,
+&nbsp;    &quot;open_issues&quot;,
+&nbsp;    &quot;watchers&quot;,
+&nbsp;    &quot;default_branch&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class Repository {</b>
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    private Integer id;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    private String nodeId;
+&nbsp;    @JsonProperty(&quot;name&quot;)
+&nbsp;    private String name;
+&nbsp;    @JsonProperty(&quot;full_name&quot;)
+&nbsp;    private String fullName;
+&nbsp;    @JsonProperty(&quot;private&quot;)
+&nbsp;    private Boolean _private;
+&nbsp;    @JsonProperty(&quot;owner&quot;)
+&nbsp;    private Owner owner;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    private String htmlUrl;
+&nbsp;    @JsonProperty(&quot;description&quot;)
+&nbsp;    private Object description;
+&nbsp;    @JsonProperty(&quot;fork&quot;)
+&nbsp;    private Boolean fork;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    private String url;
+&nbsp;    @JsonProperty(&quot;forks_url&quot;)
+&nbsp;    private String forksUrl;
+&nbsp;    @JsonProperty(&quot;keys_url&quot;)
+&nbsp;    private String keysUrl;
+&nbsp;    @JsonProperty(&quot;collaborators_url&quot;)
+&nbsp;    private String collaboratorsUrl;
+&nbsp;    @JsonProperty(&quot;teams_url&quot;)
+&nbsp;    private String teamsUrl;
+&nbsp;    @JsonProperty(&quot;hooks_url&quot;)
+&nbsp;    private String hooksUrl;
+&nbsp;    @JsonProperty(&quot;issue_events_url&quot;)
+&nbsp;    private String issueEventsUrl;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    private String eventsUrl;
+&nbsp;    @JsonProperty(&quot;assignees_url&quot;)
+&nbsp;    private String assigneesUrl;
+&nbsp;    @JsonProperty(&quot;branches_url&quot;)
+&nbsp;    private String branchesUrl;
+&nbsp;    @JsonProperty(&quot;tags_url&quot;)
+&nbsp;    private String tagsUrl;
+&nbsp;    @JsonProperty(&quot;blobs_url&quot;)
+&nbsp;    private String blobsUrl;
+&nbsp;    @JsonProperty(&quot;git_tags_url&quot;)
+&nbsp;    private String gitTagsUrl;
+&nbsp;    @JsonProperty(&quot;git_refs_url&quot;)
+&nbsp;    private String gitRefsUrl;
+&nbsp;    @JsonProperty(&quot;trees_url&quot;)
+&nbsp;    private String treesUrl;
+&nbsp;    @JsonProperty(&quot;statuses_url&quot;)
+&nbsp;    private String statusesUrl;
+&nbsp;    @JsonProperty(&quot;languages_url&quot;)
+&nbsp;    private String languagesUrl;
+&nbsp;    @JsonProperty(&quot;stargazers_url&quot;)
+&nbsp;    private String stargazersUrl;
+&nbsp;    @JsonProperty(&quot;contributors_url&quot;)
+&nbsp;    private String contributorsUrl;
+&nbsp;    @JsonProperty(&quot;subscribers_url&quot;)
+&nbsp;    private String subscribersUrl;
+&nbsp;    @JsonProperty(&quot;subscription_url&quot;)
+&nbsp;    private String subscriptionUrl;
+&nbsp;    @JsonProperty(&quot;commits_url&quot;)
+&nbsp;    private String commitsUrl;
+&nbsp;    @JsonProperty(&quot;git_commits_url&quot;)
+&nbsp;    private String gitCommitsUrl;
+&nbsp;    @JsonProperty(&quot;comments_url&quot;)
+&nbsp;    private String commentsUrl;
+&nbsp;    @JsonProperty(&quot;issue_comment_url&quot;)
+&nbsp;    private String issueCommentUrl;
+&nbsp;    @JsonProperty(&quot;contents_url&quot;)
+&nbsp;    private String contentsUrl;
+&nbsp;    @JsonProperty(&quot;compare_url&quot;)
+&nbsp;    private String compareUrl;
+&nbsp;    @JsonProperty(&quot;merges_url&quot;)
+&nbsp;    private String mergesUrl;
+&nbsp;    @JsonProperty(&quot;archive_url&quot;)
+&nbsp;    private String archiveUrl;
+&nbsp;    @JsonProperty(&quot;downloads_url&quot;)
+&nbsp;    private String downloadsUrl;
+&nbsp;    @JsonProperty(&quot;issues_url&quot;)
+&nbsp;    private String issuesUrl;
+&nbsp;    @JsonProperty(&quot;pulls_url&quot;)
+&nbsp;    private String pullsUrl;
+&nbsp;    @JsonProperty(&quot;milestones_url&quot;)
+&nbsp;    private String milestonesUrl;
+&nbsp;    @JsonProperty(&quot;notifications_url&quot;)
+&nbsp;    private String notificationsUrl;
+&nbsp;    @JsonProperty(&quot;labels_url&quot;)
+&nbsp;    private String labelsUrl;
+&nbsp;    @JsonProperty(&quot;releases_url&quot;)
+&nbsp;    private String releasesUrl;
+&nbsp;    @JsonProperty(&quot;deployments_url&quot;)
+&nbsp;    private String deploymentsUrl;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    private String createdAt;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    private String updatedAt;
+&nbsp;    @JsonProperty(&quot;pushed_at&quot;)
+&nbsp;    private String pushedAt;
+&nbsp;    @JsonProperty(&quot;git_url&quot;)
+&nbsp;    private String gitUrl;
+&nbsp;    @JsonProperty(&quot;ssh_url&quot;)
+&nbsp;    private String sshUrl;
+&nbsp;    @JsonProperty(&quot;clone_url&quot;)
+&nbsp;    private String cloneUrl;
+&nbsp;    @JsonProperty(&quot;svn_url&quot;)
+&nbsp;    private String svnUrl;
+&nbsp;    @JsonProperty(&quot;homepage&quot;)
+&nbsp;    private Object homepage;
+&nbsp;    @JsonProperty(&quot;size&quot;)
+&nbsp;    private Integer size;
+&nbsp;    @JsonProperty(&quot;stargazers_count&quot;)
+&nbsp;    private Integer stargazersCount;
+&nbsp;    @JsonProperty(&quot;watchers_count&quot;)
+&nbsp;    private Integer watchersCount;
+&nbsp;    @JsonProperty(&quot;language&quot;)
+&nbsp;    private String language;
+&nbsp;    @JsonProperty(&quot;has_issues&quot;)
+&nbsp;    private Boolean hasIssues;
+&nbsp;    @JsonProperty(&quot;has_projects&quot;)
+&nbsp;    private Boolean hasProjects;
+&nbsp;    @JsonProperty(&quot;has_downloads&quot;)
+&nbsp;    private Boolean hasDownloads;
+&nbsp;    @JsonProperty(&quot;has_wiki&quot;)
+&nbsp;    private Boolean hasWiki;
+&nbsp;    @JsonProperty(&quot;has_pages&quot;)
+&nbsp;    private Boolean hasPages;
+&nbsp;    @JsonProperty(&quot;has_discussions&quot;)
+&nbsp;    private Boolean hasDiscussions;
+&nbsp;    @JsonProperty(&quot;forks_count&quot;)
+&nbsp;    private Integer forksCount;
+&nbsp;    @JsonProperty(&quot;mirror_url&quot;)
+&nbsp;    private Object mirrorUrl;
+&nbsp;    @JsonProperty(&quot;archived&quot;)
+&nbsp;    private Boolean archived;
+&nbsp;    @JsonProperty(&quot;disabled&quot;)
+&nbsp;    private Boolean disabled;
+&nbsp;    @JsonProperty(&quot;open_issues_count&quot;)
+&nbsp;    private Integer openIssuesCount;
+&nbsp;    @JsonProperty(&quot;license&quot;)
+&nbsp;    private Object license;
+&nbsp;    @JsonProperty(&quot;allow_forking&quot;)
+&nbsp;    private Boolean allowForking;
+&nbsp;    @JsonProperty(&quot;is_template&quot;)
+&nbsp;    private Boolean isTemplate;
+&nbsp;    @JsonProperty(&quot;web_commit_signoff_required&quot;)
+&nbsp;    private Boolean webCommitSignoffRequired;
+&nbsp;    @JsonProperty(&quot;topics&quot;)
+&nbsp;    private List&lt;Object&gt; topics;
+&nbsp;    @JsonProperty(&quot;visibility&quot;)
+&nbsp;    private String visibility;
+&nbsp;    @JsonProperty(&quot;forks&quot;)
+&nbsp;    private Integer forks;
+&nbsp;    @JsonProperty(&quot;open_issues&quot;)
+&nbsp;    private Integer openIssues;
+&nbsp;    @JsonProperty(&quot;watchers&quot;)
+&nbsp;    private Integer watchers;
+&nbsp;    @JsonProperty(&quot;default_branch&quot;)
+&nbsp;    private String defaultBranch;
+<b class="nc">&nbsp;    @JsonIgnore</b>
+&nbsp;    private Map&lt;String, Object&gt; additionalProperties = new LinkedHashMap&lt;String, Object&gt;();
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public Integer getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;id&quot;)
+&nbsp;    public void setId(Integer id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    public String getNodeId() {
+<b class="nc">&nbsp;        return nodeId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;node_id&quot;)
+&nbsp;    public void setNodeId(String nodeId) {
+<b class="nc">&nbsp;        this.nodeId = nodeId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;name&quot;)
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;name&quot;)
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;full_name&quot;)
+&nbsp;    public String getFullName() {
+<b class="nc">&nbsp;        return fullName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;full_name&quot;)
+&nbsp;    public void setFullName(String fullName) {
+<b class="nc">&nbsp;        this.fullName = fullName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;private&quot;)
+&nbsp;    public Boolean getPrivate() {
+<b class="nc">&nbsp;        return _private;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;private&quot;)
+&nbsp;    public void setPrivate(Boolean _private) {
+<b class="nc">&nbsp;        this._private = _private;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;owner&quot;)
+&nbsp;    public Owner getOwner() {
+<b class="nc">&nbsp;        return owner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;owner&quot;)
+&nbsp;    public void setOwner(Owner owner) {
+<b class="nc">&nbsp;        this.owner = owner;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public String getHtmlUrl() {
+<b class="nc">&nbsp;        return htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;html_url&quot;)
+&nbsp;    public void setHtmlUrl(String htmlUrl) {
+<b class="nc">&nbsp;        this.htmlUrl = htmlUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;description&quot;)
+&nbsp;    public Object getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;description&quot;)
+&nbsp;    public void setDescription(Object description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;fork&quot;)
+&nbsp;    public Boolean getFork() {
+<b class="nc">&nbsp;        return fork;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;fork&quot;)
+&nbsp;    public void setFork(Boolean fork) {
+<b class="nc">&nbsp;        this.fork = fork;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    public String getUrl() {
+<b class="nc">&nbsp;        return url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;url&quot;)
+&nbsp;    public void setUrl(String url) {
+<b class="nc">&nbsp;        this.url = url;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks_url&quot;)
+&nbsp;    public String getForksUrl() {
+<b class="nc">&nbsp;        return forksUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks_url&quot;)
+&nbsp;    public void setForksUrl(String forksUrl) {
+<b class="nc">&nbsp;        this.forksUrl = forksUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;keys_url&quot;)
+&nbsp;    public String getKeysUrl() {
+<b class="nc">&nbsp;        return keysUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;keys_url&quot;)
+&nbsp;    public void setKeysUrl(String keysUrl) {
+<b class="nc">&nbsp;        this.keysUrl = keysUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;collaborators_url&quot;)
+&nbsp;    public String getCollaboratorsUrl() {
+<b class="nc">&nbsp;        return collaboratorsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;collaborators_url&quot;)
+&nbsp;    public void setCollaboratorsUrl(String collaboratorsUrl) {
+<b class="nc">&nbsp;        this.collaboratorsUrl = collaboratorsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;teams_url&quot;)
+&nbsp;    public String getTeamsUrl() {
+<b class="nc">&nbsp;        return teamsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;teams_url&quot;)
+&nbsp;    public void setTeamsUrl(String teamsUrl) {
+<b class="nc">&nbsp;        this.teamsUrl = teamsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;hooks_url&quot;)
+&nbsp;    public String getHooksUrl() {
+<b class="nc">&nbsp;        return hooksUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;hooks_url&quot;)
+&nbsp;    public void setHooksUrl(String hooksUrl) {
+<b class="nc">&nbsp;        this.hooksUrl = hooksUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issue_events_url&quot;)
+&nbsp;    public String getIssueEventsUrl() {
+<b class="nc">&nbsp;        return issueEventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issue_events_url&quot;)
+&nbsp;    public void setIssueEventsUrl(String issueEventsUrl) {
+<b class="nc">&nbsp;        this.issueEventsUrl = issueEventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    public String getEventsUrl() {
+<b class="nc">&nbsp;        return eventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;events_url&quot;)
+&nbsp;    public void setEventsUrl(String eventsUrl) {
+<b class="nc">&nbsp;        this.eventsUrl = eventsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;assignees_url&quot;)
+&nbsp;    public String getAssigneesUrl() {
+<b class="nc">&nbsp;        return assigneesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;assignees_url&quot;)
+&nbsp;    public void setAssigneesUrl(String assigneesUrl) {
+<b class="nc">&nbsp;        this.assigneesUrl = assigneesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;branches_url&quot;)
+&nbsp;    public String getBranchesUrl() {
+<b class="nc">&nbsp;        return branchesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;branches_url&quot;)
+&nbsp;    public void setBranchesUrl(String branchesUrl) {
+<b class="nc">&nbsp;        this.branchesUrl = branchesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;tags_url&quot;)
+&nbsp;    public String getTagsUrl() {
+<b class="nc">&nbsp;        return tagsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;tags_url&quot;)
+&nbsp;    public void setTagsUrl(String tagsUrl) {
+<b class="nc">&nbsp;        this.tagsUrl = tagsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;blobs_url&quot;)
+&nbsp;    public String getBlobsUrl() {
+<b class="nc">&nbsp;        return blobsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;blobs_url&quot;)
+&nbsp;    public void setBlobsUrl(String blobsUrl) {
+<b class="nc">&nbsp;        this.blobsUrl = blobsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_tags_url&quot;)
+&nbsp;    public String getGitTagsUrl() {
+<b class="nc">&nbsp;        return gitTagsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_tags_url&quot;)
+&nbsp;    public void setGitTagsUrl(String gitTagsUrl) {
+<b class="nc">&nbsp;        this.gitTagsUrl = gitTagsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_refs_url&quot;)
+&nbsp;    public String getGitRefsUrl() {
+<b class="nc">&nbsp;        return gitRefsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_refs_url&quot;)
+&nbsp;    public void setGitRefsUrl(String gitRefsUrl) {
+<b class="nc">&nbsp;        this.gitRefsUrl = gitRefsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;trees_url&quot;)
+&nbsp;    public String getTreesUrl() {
+<b class="nc">&nbsp;        return treesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;trees_url&quot;)
+&nbsp;    public void setTreesUrl(String treesUrl) {
+<b class="nc">&nbsp;        this.treesUrl = treesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;statuses_url&quot;)
+&nbsp;    public String getStatusesUrl() {
+<b class="nc">&nbsp;        return statusesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;statuses_url&quot;)
+&nbsp;    public void setStatusesUrl(String statusesUrl) {
+<b class="nc">&nbsp;        this.statusesUrl = statusesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;languages_url&quot;)
+&nbsp;    public String getLanguagesUrl() {
+<b class="nc">&nbsp;        return languagesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;languages_url&quot;)
+&nbsp;    public void setLanguagesUrl(String languagesUrl) {
+<b class="nc">&nbsp;        this.languagesUrl = languagesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;stargazers_url&quot;)
+&nbsp;    public String getStargazersUrl() {
+<b class="nc">&nbsp;        return stargazersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;stargazers_url&quot;)
+&nbsp;    public void setStargazersUrl(String stargazersUrl) {
+<b class="nc">&nbsp;        this.stargazersUrl = stargazersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contributors_url&quot;)
+&nbsp;    public String getContributorsUrl() {
+<b class="nc">&nbsp;        return contributorsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contributors_url&quot;)
+&nbsp;    public void setContributorsUrl(String contributorsUrl) {
+<b class="nc">&nbsp;        this.contributorsUrl = contributorsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscribers_url&quot;)
+&nbsp;    public String getSubscribersUrl() {
+<b class="nc">&nbsp;        return subscribersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscribers_url&quot;)
+&nbsp;    public void setSubscribersUrl(String subscribersUrl) {
+<b class="nc">&nbsp;        this.subscribersUrl = subscribersUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscription_url&quot;)
+&nbsp;    public String getSubscriptionUrl() {
+<b class="nc">&nbsp;        return subscriptionUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;subscription_url&quot;)
+&nbsp;    public void setSubscriptionUrl(String subscriptionUrl) {
+<b class="nc">&nbsp;        this.subscriptionUrl = subscriptionUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;commits_url&quot;)
+&nbsp;    public String getCommitsUrl() {
+<b class="nc">&nbsp;        return commitsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;commits_url&quot;)
+&nbsp;    public void setCommitsUrl(String commitsUrl) {
+<b class="nc">&nbsp;        this.commitsUrl = commitsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_commits_url&quot;)
+&nbsp;    public String getGitCommitsUrl() {
+<b class="nc">&nbsp;        return gitCommitsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_commits_url&quot;)
+&nbsp;    public void setGitCommitsUrl(String gitCommitsUrl) {
+<b class="nc">&nbsp;        this.gitCommitsUrl = gitCommitsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;comments_url&quot;)
+&nbsp;    public String getCommentsUrl() {
+<b class="nc">&nbsp;        return commentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;comments_url&quot;)
+&nbsp;    public void setCommentsUrl(String commentsUrl) {
+<b class="nc">&nbsp;        this.commentsUrl = commentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issue_comment_url&quot;)
+&nbsp;    public String getIssueCommentUrl() {
+<b class="nc">&nbsp;        return issueCommentUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issue_comment_url&quot;)
+&nbsp;    public void setIssueCommentUrl(String issueCommentUrl) {
+<b class="nc">&nbsp;        this.issueCommentUrl = issueCommentUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contents_url&quot;)
+&nbsp;    public String getContentsUrl() {
+<b class="nc">&nbsp;        return contentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contents_url&quot;)
+&nbsp;    public void setContentsUrl(String contentsUrl) {
+<b class="nc">&nbsp;        this.contentsUrl = contentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;compare_url&quot;)
+&nbsp;    public String getCompareUrl() {
+<b class="nc">&nbsp;        return compareUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;compare_url&quot;)
+&nbsp;    public void setCompareUrl(String compareUrl) {
+<b class="nc">&nbsp;        this.compareUrl = compareUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;merges_url&quot;)
+&nbsp;    public String getMergesUrl() {
+<b class="nc">&nbsp;        return mergesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;merges_url&quot;)
+&nbsp;    public void setMergesUrl(String mergesUrl) {
+<b class="nc">&nbsp;        this.mergesUrl = mergesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;archive_url&quot;)
+&nbsp;    public String getArchiveUrl() {
+<b class="nc">&nbsp;        return archiveUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;archive_url&quot;)
+&nbsp;    public void setArchiveUrl(String archiveUrl) {
+<b class="nc">&nbsp;        this.archiveUrl = archiveUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;downloads_url&quot;)
+&nbsp;    public String getDownloadsUrl() {
+<b class="nc">&nbsp;        return downloadsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;downloads_url&quot;)
+&nbsp;    public void setDownloadsUrl(String downloadsUrl) {
+<b class="nc">&nbsp;        this.downloadsUrl = downloadsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issues_url&quot;)
+&nbsp;    public String getIssuesUrl() {
+<b class="nc">&nbsp;        return issuesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issues_url&quot;)
+&nbsp;    public void setIssuesUrl(String issuesUrl) {
+<b class="nc">&nbsp;        this.issuesUrl = issuesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pulls_url&quot;)
+&nbsp;    public String getPullsUrl() {
+<b class="nc">&nbsp;        return pullsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pulls_url&quot;)
+&nbsp;    public void setPullsUrl(String pullsUrl) {
+<b class="nc">&nbsp;        this.pullsUrl = pullsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;milestones_url&quot;)
+&nbsp;    public String getMilestonesUrl() {
+<b class="nc">&nbsp;        return milestonesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;milestones_url&quot;)
+&nbsp;    public void setMilestonesUrl(String milestonesUrl) {
+<b class="nc">&nbsp;        this.milestonesUrl = milestonesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;notifications_url&quot;)
+&nbsp;    public String getNotificationsUrl() {
+<b class="nc">&nbsp;        return notificationsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;notifications_url&quot;)
+&nbsp;    public void setNotificationsUrl(String notificationsUrl) {
+<b class="nc">&nbsp;        this.notificationsUrl = notificationsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;labels_url&quot;)
+&nbsp;    public String getLabelsUrl() {
+<b class="nc">&nbsp;        return labelsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;labels_url&quot;)
+&nbsp;    public void setLabelsUrl(String labelsUrl) {
+<b class="nc">&nbsp;        this.labelsUrl = labelsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;releases_url&quot;)
+&nbsp;    public String getReleasesUrl() {
+<b class="nc">&nbsp;        return releasesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;releases_url&quot;)
+&nbsp;    public void setReleasesUrl(String releasesUrl) {
+<b class="nc">&nbsp;        this.releasesUrl = releasesUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;deployments_url&quot;)
+&nbsp;    public String getDeploymentsUrl() {
+<b class="nc">&nbsp;        return deploymentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;deployments_url&quot;)
+&nbsp;    public void setDeploymentsUrl(String deploymentsUrl) {
+<b class="nc">&nbsp;        this.deploymentsUrl = deploymentsUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    public String getCreatedAt() {
+<b class="nc">&nbsp;        return createdAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;created_at&quot;)
+&nbsp;    public void setCreatedAt(String createdAt) {
+<b class="nc">&nbsp;        this.createdAt = createdAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    public String getUpdatedAt() {
+<b class="nc">&nbsp;        return updatedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;updated_at&quot;)
+&nbsp;    public void setUpdatedAt(String updatedAt) {
+<b class="nc">&nbsp;        this.updatedAt = updatedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pushed_at&quot;)
+&nbsp;    public String getPushedAt() {
+<b class="nc">&nbsp;        return pushedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pushed_at&quot;)
+&nbsp;    public void setPushedAt(String pushedAt) {
+<b class="nc">&nbsp;        this.pushedAt = pushedAt;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_url&quot;)
+&nbsp;    public String getGitUrl() {
+<b class="nc">&nbsp;        return gitUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;git_url&quot;)
+&nbsp;    public void setGitUrl(String gitUrl) {
+<b class="nc">&nbsp;        this.gitUrl = gitUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ssh_url&quot;)
+&nbsp;    public String getSshUrl() {
+<b class="nc">&nbsp;        return sshUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ssh_url&quot;)
+&nbsp;    public void setSshUrl(String sshUrl) {
+<b class="nc">&nbsp;        this.sshUrl = sshUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;clone_url&quot;)
+&nbsp;    public String getCloneUrl() {
+<b class="nc">&nbsp;        return cloneUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;clone_url&quot;)
+&nbsp;    public void setCloneUrl(String cloneUrl) {
+<b class="nc">&nbsp;        this.cloneUrl = cloneUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;svn_url&quot;)
+&nbsp;    public String getSvnUrl() {
+<b class="nc">&nbsp;        return svnUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;svn_url&quot;)
+&nbsp;    public void setSvnUrl(String svnUrl) {
+<b class="nc">&nbsp;        this.svnUrl = svnUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;homepage&quot;)
+&nbsp;    public Object getHomepage() {
+<b class="nc">&nbsp;        return homepage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;homepage&quot;)
+&nbsp;    public void setHomepage(Object homepage) {
+<b class="nc">&nbsp;        this.homepage = homepage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;size&quot;)
+&nbsp;    public Integer getSize() {
+<b class="nc">&nbsp;        return size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;size&quot;)
+&nbsp;    public void setSize(Integer size) {
+<b class="nc">&nbsp;        this.size = size;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;stargazers_count&quot;)
+&nbsp;    public Integer getStargazersCount() {
+<b class="nc">&nbsp;        return stargazersCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;stargazers_count&quot;)
+&nbsp;    public void setStargazersCount(Integer stargazersCount) {
+<b class="nc">&nbsp;        this.stargazersCount = stargazersCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;watchers_count&quot;)
+&nbsp;    public Integer getWatchersCount() {
+<b class="nc">&nbsp;        return watchersCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;watchers_count&quot;)
+&nbsp;    public void setWatchersCount(Integer watchersCount) {
+<b class="nc">&nbsp;        this.watchersCount = watchersCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;language&quot;)
+&nbsp;    public String getLanguage() {
+<b class="nc">&nbsp;        return language;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;language&quot;)
+&nbsp;    public void setLanguage(String language) {
+<b class="nc">&nbsp;        this.language = language;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_issues&quot;)
+&nbsp;    public Boolean getHasIssues() {
+<b class="nc">&nbsp;        return hasIssues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_issues&quot;)
+&nbsp;    public void setHasIssues(Boolean hasIssues) {
+<b class="nc">&nbsp;        this.hasIssues = hasIssues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_projects&quot;)
+&nbsp;    public Boolean getHasProjects() {
+<b class="nc">&nbsp;        return hasProjects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_projects&quot;)
+&nbsp;    public void setHasProjects(Boolean hasProjects) {
+<b class="nc">&nbsp;        this.hasProjects = hasProjects;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_downloads&quot;)
+&nbsp;    public Boolean getHasDownloads() {
+<b class="nc">&nbsp;        return hasDownloads;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_downloads&quot;)
+&nbsp;    public void setHasDownloads(Boolean hasDownloads) {
+<b class="nc">&nbsp;        this.hasDownloads = hasDownloads;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_wiki&quot;)
+&nbsp;    public Boolean getHasWiki() {
+<b class="nc">&nbsp;        return hasWiki;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_wiki&quot;)
+&nbsp;    public void setHasWiki(Boolean hasWiki) {
+<b class="nc">&nbsp;        this.hasWiki = hasWiki;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_pages&quot;)
+&nbsp;    public Boolean getHasPages() {
+<b class="nc">&nbsp;        return hasPages;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_pages&quot;)
+&nbsp;    public void setHasPages(Boolean hasPages) {
+<b class="nc">&nbsp;        this.hasPages = hasPages;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_discussions&quot;)
+&nbsp;    public Boolean getHasDiscussions() {
+<b class="nc">&nbsp;        return hasDiscussions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;has_discussions&quot;)
+&nbsp;    public void setHasDiscussions(Boolean hasDiscussions) {
+<b class="nc">&nbsp;        this.hasDiscussions = hasDiscussions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks_count&quot;)
+&nbsp;    public Integer getForksCount() {
+<b class="nc">&nbsp;        return forksCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks_count&quot;)
+&nbsp;    public void setForksCount(Integer forksCount) {
+<b class="nc">&nbsp;        this.forksCount = forksCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;mirror_url&quot;)
+&nbsp;    public Object getMirrorUrl() {
+<b class="nc">&nbsp;        return mirrorUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;mirror_url&quot;)
+&nbsp;    public void setMirrorUrl(Object mirrorUrl) {
+<b class="nc">&nbsp;        this.mirrorUrl = mirrorUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;archived&quot;)
+&nbsp;    public Boolean getArchived() {
+<b class="nc">&nbsp;        return archived;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;archived&quot;)
+&nbsp;    public void setArchived(Boolean archived) {
+<b class="nc">&nbsp;        this.archived = archived;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;disabled&quot;)
+&nbsp;    public Boolean getDisabled() {
+<b class="nc">&nbsp;        return disabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;disabled&quot;)
+&nbsp;    public void setDisabled(Boolean disabled) {
+<b class="nc">&nbsp;        this.disabled = disabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;open_issues_count&quot;)
+&nbsp;    public Integer getOpenIssuesCount() {
+<b class="nc">&nbsp;        return openIssuesCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;open_issues_count&quot;)
+&nbsp;    public void setOpenIssuesCount(Integer openIssuesCount) {
+<b class="nc">&nbsp;        this.openIssuesCount = openIssuesCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;license&quot;)
+&nbsp;    public Object getLicense() {
+<b class="nc">&nbsp;        return license;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;license&quot;)
+&nbsp;    public void setLicense(Object license) {
+<b class="nc">&nbsp;        this.license = license;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;allow_forking&quot;)
+&nbsp;    public Boolean getAllowForking() {
+<b class="nc">&nbsp;        return allowForking;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;allow_forking&quot;)
+&nbsp;    public void setAllowForking(Boolean allowForking) {
+<b class="nc">&nbsp;        this.allowForking = allowForking;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;is_template&quot;)
+&nbsp;    public Boolean getIsTemplate() {
+<b class="nc">&nbsp;        return isTemplate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;is_template&quot;)
+&nbsp;    public void setIsTemplate(Boolean isTemplate) {
+<b class="nc">&nbsp;        this.isTemplate = isTemplate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;web_commit_signoff_required&quot;)
+&nbsp;    public Boolean getWebCommitSignoffRequired() {
+<b class="nc">&nbsp;        return webCommitSignoffRequired;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;web_commit_signoff_required&quot;)
+&nbsp;    public void setWebCommitSignoffRequired(Boolean webCommitSignoffRequired) {
+<b class="nc">&nbsp;        this.webCommitSignoffRequired = webCommitSignoffRequired;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;topics&quot;)
+&nbsp;    public List&lt;Object&gt; getTopics() {
+<b class="nc">&nbsp;        return topics;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;topics&quot;)
+&nbsp;    public void setTopics(List&lt;Object&gt; topics) {
+<b class="nc">&nbsp;        this.topics = topics;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;visibility&quot;)
+&nbsp;    public String getVisibility() {
+<b class="nc">&nbsp;        return visibility;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;visibility&quot;)
+&nbsp;    public void setVisibility(String visibility) {
+<b class="nc">&nbsp;        this.visibility = visibility;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks&quot;)
+&nbsp;    public Integer getForks() {
+<b class="nc">&nbsp;        return forks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;forks&quot;)
+&nbsp;    public void setForks(Integer forks) {
+<b class="nc">&nbsp;        this.forks = forks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;open_issues&quot;)
+&nbsp;    public Integer getOpenIssues() {
+<b class="nc">&nbsp;        return openIssues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;open_issues&quot;)
+&nbsp;    public void setOpenIssues(Integer openIssues) {
+<b class="nc">&nbsp;        this.openIssues = openIssues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;watchers&quot;)
+&nbsp;    public Integer getWatchers() {
+<b class="nc">&nbsp;        return watchers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;watchers&quot;)
+&nbsp;    public void setWatchers(Integer watchers) {
+<b class="nc">&nbsp;        this.watchers = watchers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;default_branch&quot;)
+&nbsp;    public String getDefaultBranch() {
+<b class="nc">&nbsp;        return defaultBranch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;default_branch&quot;)
+&nbsp;    public void setDefaultBranch(String defaultBranch) {
+<b class="nc">&nbsp;        this.defaultBranch = defaultBranch;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnyGetter
+&nbsp;    public Map&lt;String, Object&gt; getAdditionalProperties() {
+<b class="nc">&nbsp;        return this.additionalProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnySetter
+&nbsp;    public void setAdditionalProperty(String name, Object value) {
+<b class="nc">&nbsp;        this.additionalProperties.put(name, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

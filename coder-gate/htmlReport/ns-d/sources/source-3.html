@@ -1,0 +1,398 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EventService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services</a>
+</div>
+
+<h1>Coverage Summary for Class: EventService (com.github.codergate.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (2/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1.5%
+  </span>
+  <span class="absValue">
+    (2/131)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.github.codergate.dto.event.UserEventDTO;
+&nbsp;import com.github.codergate.dto.installation.RepositoriesAddedDTO;
+&nbsp;import com.github.codergate.entities.AnalysisEntity;
+&nbsp;import com.github.codergate.repositories.AnalysisRepository;
+&nbsp;import com.github.codergate.repositories.RepositoryRepository;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.github.codergate.dto.installation.InstallationPayloadDTO;
+&nbsp;import com.github.codergate.dto.push.HeadCommitDTO;
+&nbsp;import com.github.codergate.entities.EventEntity;
+&nbsp;import com.github.codergate.entities.RepositoryEntity;
+&nbsp;import com.github.codergate.entities.UserEntity;
+&nbsp;import com.github.codergate.repositories.EventRepository;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class EventService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    EventRepository eventRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    UserService userService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    RepositoryService repositoryService;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(EventService.class);</b>
+&nbsp;    @Autowired
+&nbsp;    private RepositoryRepository repositoryRepository;
+&nbsp;    @Autowired
+&nbsp;    private AnalysisRepository analysisRepository;
+&nbsp;
+&nbsp;    /***
+&nbsp;     * adds the required event done by user into the database
+&nbsp;     * 
+&nbsp;     * @param eventType        event name
+&nbsp;     * @param userId           user id
+&nbsp;     * @param repositoryIdList repositoryRepository ids
+&nbsp;     * @return dto class
+&nbsp;     */
+&nbsp;    public InstallationPayloadDTO addEvent(String eventType, int userId, List&lt;Integer&gt; repositoryIdList) {
+&nbsp;        InstallationPayloadDTO installationPayloadDTO;
+<b class="nc">&nbsp;        List&lt;EventEntity&gt; eventEntity = convertDTOToEntity(eventType, userId, repositoryIdList);</b>
+<b class="nc">&nbsp;        List&lt;EventEntity&gt; savedEvent = eventRepository.saveAll(eventEntity);</b>
+<b class="nc">&nbsp;        LOGGER.info(&quot;addEvent : adding the event information {}&quot;, savedEvent);</b>
+<b class="nc">&nbsp;        installationPayloadDTO = convertEntityToDTO(savedEvent);</b>
+<b class="nc">&nbsp;        return installationPayloadDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Adds push event details to table
+&nbsp;     * 
+&nbsp;     * @param headCommitDTO HeadCommitDTO object
+&nbsp;     * @param userID        ID of user in integer format
+&nbsp;     * @param repositoryID  ID of repository in integer format
+&nbsp;     * @return HeadCommitDTO object
+&nbsp;     */
+&nbsp;    public EventEntity addEvent(HeadCommitDTO headCommitDTO, int userID, int repositoryID) {
+<b class="nc">&nbsp;        HeadCommitDTO headCommit = null;</b>
+<b class="nc">&nbsp;        EventEntity eventEntity = headCommitDtoToEntity(headCommitDTO, userID, repositoryID);</b>
+<b class="nc">&nbsp;        if (eventEntity != null) {</b>
+<b class="nc">&nbsp;            EventEntity savedEntity = eventRepository.save(eventEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;addEvent : The event information for commit is added {}&quot;, savedEntity);</b>
+<b class="nc">&nbsp;            headCommit = entityToHeadCommitDto(savedEntity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return eventEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /****
+&nbsp;     * Gets the event information
+&nbsp;     * 
+&nbsp;     * @param eventId event id
+&nbsp;     * @return entity class
+&nbsp;     */
+&nbsp;    public EventEntity getEventById(Long eventId) {
+<b class="nc">&nbsp;        EventEntity eventEntity = null;</b>
+<b class="nc">&nbsp;        Optional&lt;EventEntity&gt; optionalEventEntity = eventRepository.findById(eventId.intValue());</b>
+<b class="nc">&nbsp;        if (optionalEventEntity.isPresent()) {</b>
+<b class="nc">&nbsp;            eventEntity = optionalEventEntity.get();</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;getEventById : Getting the event information {}&quot;, eventId);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;getEventById: Event with ID: {} not found&quot;, eventId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return eventEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Updates the even information
+&nbsp;     * 
+&nbsp;     * @param eventId event id
+&nbsp;     * @return entity class
+&nbsp;     */
+&nbsp;    public EventEntity updateEntity(Long eventId) {
+<b class="nc">&nbsp;        EventEntity eventEntity = eventRepository.findById(eventId.intValue()).orElse(null);</b>
+<b class="nc">&nbsp;        if (eventEntity != null) {</b>
+&nbsp;            // perform further implementation when required
+<b class="nc">&nbsp;            EventEntity saveEvent = eventRepository.save(eventEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;updateEntity : Updating the event information&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return eventEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Delete the events
+&nbsp;     * 
+&nbsp;     * @param eventId event id
+&nbsp;     * @return entity class
+&nbsp;     */
+&nbsp;    public boolean deleteEventById(int eventId) {
+<b class="nc">&nbsp;        boolean isDeleted = false;</b>
+<b class="nc">&nbsp;        if (eventId != 0) {</b>
+<b class="nc">&nbsp;            eventRepository.deleteById(eventId);</b>
+<b class="nc">&nbsp;            isDeleted = true;</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;deleteEventById : Deleting the event information {}&quot;, eventId);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return isDeleted;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts dto class to entity
+&nbsp;     * 
+&nbsp;     * @param eventTypeName    event name
+&nbsp;     * @param userId           user id
+&nbsp;     * @param repositoryIdList repositoryRepository ids
+&nbsp;     * @return entity
+&nbsp;     */
+&nbsp;    private List&lt;EventEntity&gt; convertDTOToEntity(String eventTypeName, int userId, List&lt;Integer&gt; repositoryIdList) {
+<b class="nc">&nbsp;        List&lt;EventEntity&gt; eventEntityList = new ArrayList&lt;&gt;();</b>
+&nbsp;        EventEntity eventEntity;
+<b class="nc">&nbsp;        if (eventTypeName != null) {</b>
+<b class="nc">&nbsp;            UserEntity userEntity = new UserEntity();</b>
+<b class="nc">&nbsp;            userEntity.setUserId(userId);</b>
+<b class="nc">&nbsp;            for (int id : repositoryIdList) {</b>
+<b class="nc">&nbsp;                eventEntity = new EventEntity();</b>
+<b class="nc">&nbsp;                eventEntity.setEventName(eventTypeName);</b>
+<b class="nc">&nbsp;                RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;                repositoryEntity.setRepositoryId(id);</b>
+<b class="nc">&nbsp;                eventEntity.setRepositoryIdInEvent(repositoryEntity);</b>
+<b class="nc">&nbsp;                eventEntity.setUserIdInEvent(userEntity);</b>
+<b class="nc">&nbsp;                eventEntityList.add(eventEntity);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertDTOToEntity : DTO has been converted to Entity {}&quot;, eventEntityList);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertDTOToEntity : Event Entity value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return eventEntityList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Converts HeadCommitDTO to Event Entity
+&nbsp;     * 
+&nbsp;     * @param headCommitDTO HeadCommitDTO
+&nbsp;     * @param userID        ID of user in integer format
+&nbsp;     * @param repositoryID  ID of repository in integer format
+&nbsp;     * @return Event Entity
+&nbsp;     */
+&nbsp;    private EventEntity headCommitDtoToEntity(HeadCommitDTO headCommitDTO, int userID, int repositoryID) {
+<b class="nc">&nbsp;        EventEntity eventEntity = null;</b>
+<b class="nc">&nbsp;        if (headCommitDTO != null) {</b>
+<b class="nc">&nbsp;            eventEntity = new EventEntity();</b>
+<b class="nc">&nbsp;            if (headCommitDTO.getId() != null) {</b>
+<b class="nc">&nbsp;                eventEntity.setCommitId(headCommitDTO.getId());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (headCommitDTO.getMessage() != null) {</b>
+<b class="nc">&nbsp;                eventEntity.setCommitMessage(headCommitDTO.getMessage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            eventEntity.setEventName(&quot;push&quot;);</b>
+<b class="nc">&nbsp;            UserEntity userEntity = new UserEntity();</b>
+<b class="nc">&nbsp;            userEntity.setUserId(userID);</b>
+<b class="nc">&nbsp;            eventEntity.setUserIdInEvent(userEntity);</b>
+<b class="nc">&nbsp;            RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;            repositoryEntity.setRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;            eventEntity.setRepositoryIdInEvent(repositoryEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;headCommitDtoToEntity : HeadCommit DTO has been converted to Entity {}&quot;, eventEntity);</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;            LOGGER.warn(&quot;headCommitDtoToEntity : Event Entity for HeadCommit is null &quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return eventEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * converts entity class to dto class
+&nbsp;     * 
+&nbsp;     * @param eventType event information
+&nbsp;     * @return dto class
+&nbsp;     */
+&nbsp;    private InstallationPayloadDTO convertEntityToDTO(List&lt;EventEntity&gt; eventType) {
+<b class="nc">&nbsp;        InstallationPayloadDTO installationPayloadDTO = null;</b>
+<b class="nc">&nbsp;        if (eventType != null) {</b>
+<b class="nc">&nbsp;            installationPayloadDTO = new InstallationPayloadDTO();</b>
+<b class="nc">&nbsp;            if (eventType.get(0).getEventName() != null) {</b>
+<b class="nc">&nbsp;                installationPayloadDTO.setAction(eventType.get(0).getEventName());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            LOGGER.info(&quot;InstallationPayloadDTO : Entity has been converted to DTO {}&quot;, installationPayloadDTO);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;InstallationPayloadDTO : converting entity to installationPayloadDTO is null &quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return installationPayloadDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Converts Event Entity to HeadCommitDTO
+&nbsp;     * 
+&nbsp;     * @param eventType Event Entity
+&nbsp;     * @return HeadCommitDTO object
+&nbsp;     */
+&nbsp;    private HeadCommitDTO entityToHeadCommitDto(EventEntity eventType) {
+<b class="nc">&nbsp;        HeadCommitDTO headCommitDTO = null;</b>
+<b class="nc">&nbsp;        if (eventType != null) {</b>
+<b class="nc">&nbsp;            headCommitDTO = new HeadCommitDTO();</b>
+<b class="nc">&nbsp;            if (eventType.getEventId() != 0L) {</b>
+<b class="nc">&nbsp;                headCommitDTO.setId(eventType.getCommitId());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (eventType.getCommitMessage() != null) {</b>
+<b class="nc">&nbsp;                headCommitDTO.setMessage(eventType.getCommitMessage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            LOGGER.info(&quot;entityToHeadCommitDto : Entity has been converted to HeadCommit DTO {}&quot;, headCommitDTO);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;entityToHeadCommitDto : converting entity to headCommitDTO is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return headCommitDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getCollaborators(String userId){
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; repositories = repositoryRepository.findByUserId(Long.parseLong(userId));</b>
+<b class="nc">&nbsp;        List&lt;Integer&gt; repositoryIds = repositories.stream()</b>
+<b class="nc">&nbsp;                .map(RepositoryEntity::getRepositoryId)</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        Set&lt;Long&gt; userIdSet = new HashSet&lt;&gt;();</b>
+<b class="nc">&nbsp;        for(Integer id : repositoryIds){</b>
+<b class="nc">&nbsp;            List&lt;Long&gt; usersByRepoId = eventRepository.findUsersByRepoId(id);</b>
+<b class="nc">&nbsp;            userIdSet.addAll(usersByRepoId);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return userIdSet.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getCodeScans(String userId){
+<b class="nc">&nbsp;        List&lt;RepositoryEntity&gt; repositories = repositoryRepository.findByUserId(Long.parseLong(userId));</b>
+<b class="nc">&nbsp;        List&lt;Integer&gt; repositoryIds = repositories.stream()</b>
+<b class="nc">&nbsp;                .map(RepositoryEntity::getRepositoryId)</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        int totalCodeScans = 0;</b>
+<b class="nc">&nbsp;        for(Integer id : repositoryIds){</b>
+<b class="nc">&nbsp;            Integer codeScansOfRepository = analysisRepository.findCodeScansOfRepository(id);</b>
+<b class="nc">&nbsp;            totalCodeScans+=codeScansOfRepository;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return totalCodeScans;</b>
+&nbsp;    }
+&nbsp;    public List&lt;UserEventDTO&gt; getUserEventDetails(String userId) throws IOException {
+<b class="nc">&nbsp;        List&lt;UserEventDTO&gt; userEventDTOS = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ObjectMapper objectMapper = new ObjectMapper();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;RepositoriesAddedDTO&gt; repositoriesFromUserId = repositoryService.getRepositoryFromUserId(Long.parseLong(userId));</b>
+<b class="nc">&nbsp;        List&lt;Integer&gt; repositoryIds = repositoriesFromUserId.stream()</b>
+<b class="nc">&nbsp;                .map(RepositoriesAddedDTO::getId)</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;EventEntity&gt; eventEntityList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for(Integer repoId : repositoryIds){</b>
+<b class="nc">&nbsp;            List&lt;EventEntity&gt; eventsByRepoId = eventRepository.findEventsByRepoId(repoId);</b>
+<b class="nc">&nbsp;            eventEntityList.addAll(eventsByRepoId);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        for(EventEntity event : eventEntityList){</b>
+<b class="nc">&nbsp;            UserEventDTO userEventDTO = new UserEventDTO();</b>
+<b class="nc">&nbsp;            String userDetails = userService.getPublicUserDetails(String.valueOf(event.getUserIdInEvent().getUserId()));</b>
+<b class="nc">&nbsp;            JsonNode rootNode = objectMapper.readTree(userDetails);</b>
+<b class="nc">&nbsp;            String name = rootNode.get(&quot;login&quot;).asText();</b>
+<b class="nc">&nbsp;            String userAvatar = rootNode.get(&quot;avatar_url&quot;).asText();</b>
+<b class="nc">&nbsp;            userEventDTO.setUserName(name);</b>
+<b class="nc">&nbsp;            userEventDTO.setUserAvatar(userAvatar);</b>
+<b class="nc">&nbsp;            userEventDTO.setEventName(event.getEventName());</b>
+<b class="nc">&nbsp;            userEventDTO.setCommitId(event.getCommitId());</b>
+<b class="nc">&nbsp;            Optional&lt;RepositoryEntity&gt; repository = repositoryRepository.findById(event.getRepositoryIdInEvent().getRepositoryId());</b>
+<b class="nc">&nbsp;            userEventDTO.setRepositoryName(repository.get().getRepositoryName());</b>
+<b class="nc">&nbsp;            userEventDTOS.add(userEventDTO);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return userEventDTOS;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

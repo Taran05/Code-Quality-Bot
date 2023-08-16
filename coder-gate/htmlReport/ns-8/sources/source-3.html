@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > InstallationPayloadDTO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.installation</a>
+</div>
+
+<h1>Coverage Summary for Class: InstallationPayloadDTO (com.github.codergate.dto.installation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InstallationPayloadDTO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.installation;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+<b class="nc">&nbsp;public class InstallationPayloadDTO implements Serializable {</b>
+&nbsp;
+&nbsp;    @JsonProperty(&quot;action&quot;)
+&nbsp;    private String action;
+&nbsp;    @JsonProperty(&quot;installation&quot;)
+&nbsp;    private Installation installation;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    private String repositorySelection;
+&nbsp;    @JsonProperty(&quot;repositories_added&quot;)
+&nbsp;    private List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto;
+&nbsp;    @JsonProperty(&quot;repositories_removed&quot;)
+&nbsp;    private List&lt;Object&gt; repositoriesRemoved;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories&quot;)
+&nbsp;    private List&lt;RepositoriesDTO&gt; repositories;
+&nbsp;    @JsonProperty(&quot;requester&quot;)
+&nbsp;    private Object requester;
+&nbsp;    @JsonProperty(&quot;sender&quot;)
+&nbsp;    private Sender sender;
+&nbsp;    @JsonIgnore
+&nbsp;    private static final long serialVersionUID = -7622948711784252212L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;action&quot;)
+&nbsp;    public String getAction() {
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;action&quot;)
+&nbsp;    public void setAction(String action) {
+<b class="nc">&nbsp;        this.action = action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withAction(String action) {
+<b class="nc">&nbsp;        this.action = action;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;installation&quot;)
+&nbsp;    public Installation getInstallation() {
+<b class="nc">&nbsp;        return installation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;installation&quot;)
+&nbsp;    public void setInstallation(Installation installation) {
+<b class="nc">&nbsp;        this.installation = installation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withInstallation(Installation installation) {
+<b class="nc">&nbsp;        this.installation = installation;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    public String getRepositorySelection() {
+<b class="nc">&nbsp;        return repositorySelection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_selection&quot;)
+&nbsp;    public void setRepositorySelection(String repositorySelection) {
+<b class="nc">&nbsp;        this.repositorySelection = repositorySelection;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withRepositorySelection(String repositorySelection) {
+<b class="nc">&nbsp;        this.repositorySelection = repositorySelection;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_added&quot;)
+&nbsp;    public List&lt;RepositoriesAddedDTO&gt; getRepositoriesAdded() {
+<b class="nc">&nbsp;        return repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_added&quot;)
+&nbsp;    public void setRepositoriesAdded(List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto) {
+<b class="nc">&nbsp;        this.repositoriesAddedDto = repositoriesAddedDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withRepositoriesAdded(List&lt;RepositoriesAddedDTO&gt; repositoriesAddedDto) {
+<b class="nc">&nbsp;        this.repositoriesAddedDto = repositoriesAddedDto;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_created&quot;)
+&nbsp;    public List&lt;RepositoriesDTO&gt; getRepositories() {
+<b class="nc">&nbsp;        return repositories;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_created&quot;)
+&nbsp;    public void setRepositories(List&lt;RepositoriesDTO&gt; repositories) {
+<b class="nc">&nbsp;        this.repositories = repositories;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withRepositoriesCreated(List&lt;RepositoriesDTO&gt; repositories) {
+<b class="nc">&nbsp;        this.repositories = repositories;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_removed&quot;)
+&nbsp;    public List&lt;Object&gt; getRepositoriesRemoved() {
+<b class="nc">&nbsp;        return repositoriesRemoved;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repositories_removed&quot;)
+&nbsp;    public void setRepositoriesRemoved(List&lt;Object&gt; repositoriesRemoved) {
+<b class="nc">&nbsp;        this.repositoriesRemoved = repositoriesRemoved;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withRepositoriesRemoved(List&lt;Object&gt; repositoriesRemoved) {
+<b class="nc">&nbsp;        this.repositoriesRemoved = repositoriesRemoved;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;requester&quot;)
+&nbsp;    public Object getRequester() {
+<b class="nc">&nbsp;        return requester;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;requester&quot;)
+&nbsp;    public void setRequester(Object requester) {
+<b class="nc">&nbsp;        this.requester = requester;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withRequester(Object requester) {
+<b class="nc">&nbsp;        this.requester = requester;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;sender&quot;)
+&nbsp;    public Sender getSender() {
+<b class="nc">&nbsp;        return sender;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;sender&quot;)
+&nbsp;    public void setSender(Sender sender) {
+<b class="nc">&nbsp;        this.sender = sender;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstallationPayloadDTO withSender(Sender sender) {
+<b class="nc">&nbsp;        this.sender = sender;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

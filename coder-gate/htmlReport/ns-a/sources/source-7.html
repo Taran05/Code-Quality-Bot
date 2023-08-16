@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PushEventPayloadDTO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.push</a>
+</div>
+
+<h1>Coverage Summary for Class: PushEventPayloadDTO (com.github.codergate.dto.push)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PushEventPayloadDTO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.push;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnyGetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAnySetter;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;event&quot;,
+&nbsp;    &quot;payload&quot;
+&nbsp;})
+&nbsp;public class PushEventPayloadDTO implements Serializable
+&nbsp;{
+&nbsp;
+&nbsp;    @JsonProperty(&quot;event&quot;)
+&nbsp;    private String event;
+&nbsp;    @JsonProperty(&quot;payload&quot;)
+&nbsp;    private PusherPayloadDTO pusherPayloadDTO;
+<b class="nc">&nbsp;    @JsonIgnore</b>
+&nbsp;    private Map&lt;String, Object&gt; additionalProperties = new LinkedHashMap&lt;String, Object&gt;();
+&nbsp;    private final static long serialVersionUID = -3940214695871613922L;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * No args constructor for use in serialization
+&nbsp;     * 
+&nbsp;     */
+<b class="nc">&nbsp;    public PushEventPayloadDTO() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 
+&nbsp;     * @param pusherPayloadDTO
+&nbsp;     * @param event
+&nbsp;     */
+&nbsp;    public PushEventPayloadDTO(String event, PusherPayloadDTO pusherPayloadDTO) {
+<b class="nc">&nbsp;        super();</b>
+<b class="nc">&nbsp;        this.event = event;</b>
+<b class="nc">&nbsp;        this.pusherPayloadDTO = pusherPayloadDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;event&quot;)
+&nbsp;    public String getEvent() {
+<b class="nc">&nbsp;        return event;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;event&quot;)
+&nbsp;    public void setEvent(String event) {
+<b class="nc">&nbsp;        this.event = event;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;payload&quot;)
+&nbsp;    public PusherPayloadDTO getPayload() {
+<b class="nc">&nbsp;        return pusherPayloadDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;payload&quot;)
+&nbsp;    public void setPayload(PusherPayloadDTO pusherPayloadDTO) {
+<b class="nc">&nbsp;        this.pusherPayloadDTO = pusherPayloadDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnyGetter
+&nbsp;    public Map&lt;String, Object&gt; getAdditionalProperties() {
+<b class="nc">&nbsp;        return this.additionalProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonAnySetter
+&nbsp;    public void setAdditionalProperty(String name, Object value) {
+<b class="nc">&nbsp;        this.additionalProperties.put(name, value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

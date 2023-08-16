@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > JwtUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: JwtUtils (com.github.codergate.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JwtUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.utils;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.charset.Charset;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.security.KeyFactory;
+&nbsp;import java.security.NoSuchAlgorithmException;
+&nbsp;import java.security.PrivateKey;
+&nbsp;import java.security.spec.InvalidKeySpecException;
+&nbsp;import java.security.spec.PKCS8EncodedKeySpec;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Base64;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.util.LinkedMultiValueMap;
+&nbsp;import org.springframework.util.MultiValueMap;
+&nbsp;
+&nbsp;import io.jsonwebtoken.Jwts;
+&nbsp;import io.jsonwebtoken.SignatureAlgorithm;
+&nbsp;
+&nbsp;public class JwtUtils {
+&nbsp;
+&nbsp;        private static final int TEN_MINUTES_EXPIRATION_BUFFER = 600000;
+<b class="nc">&nbsp;        private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * generated json web token for github APIs using Github app private key and id
+&nbsp;         * 
+&nbsp;         * @return String
+&nbsp;         */
+&nbsp;        public static String generateJwtToken(String appId) {
+<b class="nc">&nbsp;                LOGGER.debug(&quot;generateJwtToken : Entering the method&quot;);</b>
+<b class="nc">&nbsp;                String token = null;</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                        Path privateKeyFilePath = Path.of(</b>
+<b class="nc">&nbsp;                                        System.getProperty(&quot;user.dir&quot;)</b>
+&nbsp;                                                        + &quot;/src/main/resources/private-key.pem&quot;);
+&nbsp;                        // setting bounty castle provider for private key encryption
+<b class="nc">&nbsp;                        java.security.Security.addProvider(</b>
+&nbsp;                                        new org.bouncycastle.jce.provider.BouncyCastleProvider());
+&nbsp;                        // reading private key from resources directory
+<b class="nc">&nbsp;                        String rsaPrivateKey = readPrivateKey(privateKeyFilePath.toFile());</b>
+&nbsp;                        // base64 decoding and re-encoding private key using RSA
+<b class="nc">&nbsp;                        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(</b>
+<b class="nc">&nbsp;                                        Base64.getDecoder().decode(rsaPrivateKey));</b>
+<b class="nc">&nbsp;                        KeyFactory kf = KeyFactory.getInstance(&quot;RSA&quot;);</b>
+<b class="nc">&nbsp;                        PrivateKey privKey = kf.generatePrivate(keySpec);</b>
+&nbsp;                        // building jwt token
+<b class="nc">&nbsp;                        token = Jwts.builder()</b>
+&nbsp;                                        // issued at current timestamp
+<b class="nc">&nbsp;                                        .setIssuedAt(new Date())</b>
+&nbsp;                                        // expiring in 10 min
+<b class="nc">&nbsp;                                        .setExpiration(new Date(</b>
+<b class="nc">&nbsp;                                                        System.currentTimeMillis() + TEN_MINUTES_EXPIRATION_BUFFER))</b>
+&nbsp;                                        // issued b y coder gate app
+<b class="nc">&nbsp;                                        .setIssuer(appId)</b>
+&nbsp;                                        // signed using RS 256 algorithm as required by github
+<b class="nc">&nbsp;                                        .signWith(SignatureAlgorithm.RS256, privKey)</b>
+<b class="nc">&nbsp;                                        .compact();</b>
+<b class="nc">&nbsp;                } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {</b>
+<b class="nc">&nbsp;                        LOGGER.error(&quot;JwtUtils :: generateJwtToken : Failed to generate jwt token {}&quot;,</b>
+<b class="nc">&nbsp;                                        Arrays.toString(e.getStackTrace()));</b>
+<b class="nc">&nbsp;                        LOGGER.info(&quot;JwtUtils :: generateJwtToken : Setting token as anonymous&quot;);</b>
+<b class="nc">&nbsp;                        token = &quot;anonymous&quot;;</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                LOGGER.debug(&quot;generateJwtToken : Exiting the method with token {}&quot;, token);</b>
+<b class="nc">&nbsp;                return token;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * github specific header generator
+&nbsp;         * 
+&nbsp;         * @return MultiValueMap&lt;String, String&gt;
+&nbsp;         */
+&nbsp;        public static MultiValueMap&lt;String, String&gt; getGithubSpecificHeaders() {
+<b class="nc">&nbsp;                MultiValueMap&lt;String, String&gt; githubHeaders = new LinkedMultiValueMap&lt;&gt;();</b>
+<b class="nc">&nbsp;                githubHeaders.add(&quot;Accept&quot;, &quot;application/vnd.github+json&quot;);</b>
+<b class="nc">&nbsp;                return githubHeaders;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * extracting app private key
+&nbsp;         * 
+&nbsp;         * @param file
+&nbsp;         * @return String
+&nbsp;         * @throws IOException
+&nbsp;         */
+&nbsp;        private static String readPrivateKey(File file) throws IOException {
+<b class="nc">&nbsp;                String fileContent = new String(Files.readAllBytes(file.toPath()), Charset.defaultCharset());</b>
+<b class="nc">&nbsp;                String privateKeyStart = &quot;-----BEGIN RSA PRIVATE KEY-----&quot;;</b>
+<b class="nc">&nbsp;                String privateKeyEnd = &quot;-----END RSA PRIVATE KEY-----&quot;;</b>
+<b class="nc">&nbsp;                return fileContent.replace(privateKeyStart, &quot;&quot;)</b>
+<b class="nc">&nbsp;                                .replaceAll(System.lineSeparator(), &quot;&quot;)</b>
+<b class="nc">&nbsp;                                .replace(privateKeyEnd, &quot;&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Provides read-only access to a private key file.
+&nbsp;         *
+&nbsp;         * @param file
+&nbsp;         * @return String
+&nbsp;         * @throws IOException
+&nbsp;         */
+&nbsp;        public static String getPrivateKeyContent(File file) throws IOException {
+<b class="nc">&nbsp;                return readPrivateKey(file);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private JwtUtils() {
+&nbsp;        }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

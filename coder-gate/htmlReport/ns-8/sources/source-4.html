@@ -1,0 +1,270 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Permissions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.installation</a>
+</div>
+
+<h1>Coverage Summary for Class: Permissions (com.github.codergate.dto.installation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Permissions</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.installation;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+<b class="nc">&nbsp;public class Permissions implements Serializable {</b>
+&nbsp;
+&nbsp;    @JsonProperty(&quot;checks&quot;)
+&nbsp;    private String checks;
+&nbsp;    @JsonProperty(&quot;issues&quot;)
+&nbsp;    private String issues;
+&nbsp;    @JsonProperty(&quot;actions&quot;)
+&nbsp;    private String actions;
+&nbsp;    @JsonProperty(&quot;contents&quot;)
+&nbsp;    private String contents;
+&nbsp;    @JsonProperty(&quot;metadata&quot;)
+&nbsp;    private String metadata;
+&nbsp;    @JsonProperty(&quot;workflows&quot;)
+&nbsp;    private String workflows;
+&nbsp;    @JsonProperty(&quot;pull_requests&quot;)
+&nbsp;    private String pullRequests;
+&nbsp;    @JsonProperty(&quot;security_events&quot;)
+&nbsp;    private String securityEvents;
+&nbsp;    @JsonProperty(&quot;repository_hooks&quot;)
+&nbsp;    private String repositoryHooks;
+&nbsp;    private static final long serialVersionUID = -9076112883664283050L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;checks&quot;)
+&nbsp;    public String getChecks() {
+<b class="nc">&nbsp;        return checks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;checks&quot;)
+&nbsp;    public void setChecks(String checks) {
+<b class="nc">&nbsp;        this.checks = checks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withChecks(String checks) {
+<b class="nc">&nbsp;        this.checks = checks;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issues&quot;)
+&nbsp;    public String getIssues() {
+<b class="nc">&nbsp;        return issues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;issues&quot;)
+&nbsp;    public void setIssues(String issues) {
+<b class="nc">&nbsp;        this.issues = issues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withIssues(String issues) {
+<b class="nc">&nbsp;        this.issues = issues;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;actions&quot;)
+&nbsp;    public String getActions() {
+<b class="nc">&nbsp;        return actions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;actions&quot;)
+&nbsp;    public void setActions(String actions) {
+<b class="nc">&nbsp;        this.actions = actions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withActions(String actions) {
+<b class="nc">&nbsp;        this.actions = actions;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contents&quot;)
+&nbsp;    public String getContents() {
+<b class="nc">&nbsp;        return contents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;contents&quot;)
+&nbsp;    public void setContents(String contents) {
+<b class="nc">&nbsp;        this.contents = contents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withContents(String contents) {
+<b class="nc">&nbsp;        this.contents = contents;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;metadata&quot;)
+&nbsp;    public String getMetadata() {
+<b class="nc">&nbsp;        return metadata;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;metadata&quot;)
+&nbsp;    public void setMetadata(String metadata) {
+<b class="nc">&nbsp;        this.metadata = metadata;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withMetadata(String metadata) {
+<b class="nc">&nbsp;        this.metadata = metadata;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;workflows&quot;)
+&nbsp;    public String getWorkflows() {
+<b class="nc">&nbsp;        return workflows;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;workflows&quot;)
+&nbsp;    public void setWorkflows(String workflows) {
+<b class="nc">&nbsp;        this.workflows = workflows;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withWorkflows(String workflows) {
+<b class="nc">&nbsp;        this.workflows = workflows;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pull_requests&quot;)
+&nbsp;    public String getPullRequests() {
+<b class="nc">&nbsp;        return pullRequests;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;pull_requests&quot;)
+&nbsp;    public void setPullRequests(String pullRequests) {
+<b class="nc">&nbsp;        this.pullRequests = pullRequests;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withPullRequests(String pullRequests) {
+<b class="nc">&nbsp;        this.pullRequests = pullRequests;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;security_events&quot;)
+&nbsp;    public String getSecurityEvents() {
+<b class="nc">&nbsp;        return securityEvents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;security_events&quot;)
+&nbsp;    public void setSecurityEvents(String securityEvents) {
+<b class="nc">&nbsp;        this.securityEvents = securityEvents;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withSecurityEvents(String securityEvents) {
+<b class="nc">&nbsp;        this.securityEvents = securityEvents;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_hooks&quot;)
+&nbsp;    public String getRepositoryHooks() {
+<b class="nc">&nbsp;        return repositoryHooks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;repository_hooks&quot;)
+&nbsp;    public void setRepositoryHooks(String repositoryHooks) {
+<b class="nc">&nbsp;        this.repositoryHooks = repositoryHooks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Permissions withRepositoryHooks(String repositoryHooks) {
+<b class="nc">&nbsp;        this.repositoryHooks = repositoryHooks;</b>
+<b class="nc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

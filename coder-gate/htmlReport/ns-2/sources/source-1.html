@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnalysisController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: AnalysisController (com.github.codergate.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnalysisController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.controllers;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;import org.springframework.web.multipart.MultipartFile;
+&nbsp;
+&nbsp;import com.github.codergate.entities.AnalysisEntity;
+&nbsp;import com.github.codergate.services.AnalysisService;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class AnalysisController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AnalysisService analysisService;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(AnalysisController.class);</b>
+&nbsp;
+&nbsp;    @PostMapping(value = &quot;/analysis/{repo}/{branch}&quot;)
+&nbsp;    public ResponseEntity&lt;AnalysisEntity&gt; convertXmlToJson(@RequestParam(&quot;file&quot;) MultipartFile file,
+&nbsp;            @PathVariable String repo,
+&nbsp;            @PathVariable String branch) throws NumberFormatException, IOException {
+<b class="nc">&nbsp;        LOGGER.debug(&quot;convertXmlToJson : Entering the method&quot;);</b>
+<b class="nc">&nbsp;        if (file != null &amp;&amp; !file.isEmpty()) {</b>
+<b class="nc">&nbsp;            AnalysisEntity analysisEntity = analysisService.processAnalysis(file, Integer.parseInt(repo), branch);</b>
+<b class="nc">&nbsp;            LOGGER.debug(&quot;convertXmlToJson : Exiting the method&quot;);</b>
+<b class="nc">&nbsp;            return ResponseEntity.ok(analysisEntity);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().build();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

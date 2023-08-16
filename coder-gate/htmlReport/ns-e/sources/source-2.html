@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PullRequestUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services.utility</a>
+</div>
+
+<h1>Coverage Summary for Class: PullRequestUtil (com.github.codergate.services.utility)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PullRequestUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3%
+  </span>
+  <span class="absValue">
+    (1/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services.utility;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;import com.github.codergate.entities.AnalysisEntity;
+&nbsp;import com.github.codergate.entities.ThresholdEntity;
+&nbsp;
+&nbsp;@Component
+<b class="fc">&nbsp;public class PullRequestUtil {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * method compares latest analysis with threshold values for a repo
+&nbsp;     * 
+&nbsp;     * @param analysisEntity
+&nbsp;     * @param thresholdEntity
+&nbsp;     * @return Boolean
+&nbsp;     */
+&nbsp;    public List&lt;String&gt; getFalseThresholdKeys(AnalysisEntity analysisEntity, ThresholdEntity thresholdEntity) {
+<b class="nc">&nbsp;        List&lt;String&gt; falseKeys = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        if (analysisEntity.getCodeSmell() &gt;= thresholdEntity.getCodeSmell()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Code smell density&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getCyclomaticComplexity() &gt;= thresholdEntity.getCyclomaticComplexity()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Cyclomatic complexity&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getDuplicatedLines() &gt;= thresholdEntity.getDuplicatedLines()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Line duplication&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getArchSmellDensity() &gt;= thresholdEntity.getArchSmellDensity()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Architecture smell density&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getDesignSmellDensity() &gt;= thresholdEntity.getDesignSmellDensity()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Design smell density&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getImpSmellDensity() &gt;= thresholdEntity.getImpSmellDensity()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Implementation smell density&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getComplexConditional() &gt;= thresholdEntity.getComplexConditional()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Complex conditions&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getCyclicallyDependentModularization() &gt;= thresholdEntity.getCycDependentMod()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Cyclically dependent modularization&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getCyclicDependency() &gt;= thresholdEntity.getCyclicDependency()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Cyclic dependencie&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getEmptyCatchClause() &gt;= thresholdEntity.getEmptyCatchClause()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Empty catch clause&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getEmptyTest() &gt;= thresholdEntity.getEmptyTest()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Empty test method&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getGodComponents() &gt;= thresholdEntity.getGodComponents()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;God component&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getInsufficientModularization() &gt;= thresholdEntity.getInsufficientModularization()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Insufficient modularization&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getMissingAssertion() &gt;= thresholdEntity.getMissingAssertion()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Missing assertion&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (analysisEntity.getUnnecessaryAbstraction() &gt;= thresholdEntity.getUnnecessaryAbstraction()) {</b>
+<b class="nc">&nbsp;            falseKeys.add(&quot;Unnecessary abstraction&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return falseKeys;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

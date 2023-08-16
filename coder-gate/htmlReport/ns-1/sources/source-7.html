@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ThresholdService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services</a>
+</div>
+
+<h1>Coverage Summary for Class: ThresholdService (com.github.codergate.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ThresholdService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/99)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.github.codergate.dto.threshold.ThresholdDTO;
+&nbsp;import com.github.codergate.entities.RepositoryEntity;
+&nbsp;import com.github.codergate.entities.ThresholdEntity;
+&nbsp;import com.github.codergate.repositories.ThresholdRepository;
+&nbsp;
+&nbsp;@Service
+<b class="nc">&nbsp;public class ThresholdService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    ThresholdRepository thresholdRepository;
+<b class="nc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(ThresholdService.class);</b>
+&nbsp;
+&nbsp;    public ThresholdDTO addThreshold(ThresholdDTO thresholdToAdd, int repositoryID) {
+<b class="nc">&nbsp;        ThresholdDTO thresholdDTO = null;</b>
+<b class="nc">&nbsp;        if (thresholdRepository.findByRepositoryId(repositoryID) != null) {</b>
+<b class="nc">&nbsp;            thresholdDTO = updateThresholdByID(thresholdToAdd, repositoryID);</b>
+&nbsp;        } else {
+&nbsp;
+<b class="nc">&nbsp;            ThresholdEntity thresholdEntity = convertThresholdDtoToEntity(thresholdToAdd, repositoryID);</b>
+<b class="nc">&nbsp;            if (thresholdEntity != null) {</b>
+<b class="nc">&nbsp;                ThresholdEntity saveEntity = thresholdRepository.save(thresholdEntity);</b>
+<b class="nc">&nbsp;                LOGGER.info(&quot;addThreshold : The threshold information has been added&quot;);</b>
+<b class="nc">&nbsp;                thresholdDTO = convertThresholdEntityToDTO(saveEntity);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return thresholdDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ThresholdDTO updateThresholdByID(ThresholdDTO newInformation, int repositoryID) {
+<b class="nc">&nbsp;        ThresholdDTO thresholdDTO = null;</b>
+<b class="nc">&nbsp;        ThresholdEntity thresholdEntity = thresholdRepository.findByRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;        if (thresholdEntity != null) {</b>
+<b class="nc">&nbsp;            if (newInformation != null) {</b>
+<b class="nc">&nbsp;                if (repositoryID != 0) {</b>
+<b class="nc">&nbsp;                    RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;                    repositoryEntity.setRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;                    thresholdEntity.setRepositoryIdInThreshold(repositoryEntity);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                thresholdEntity.setBugs(newInformation.getBugs());</b>
+<b class="nc">&nbsp;                thresholdEntity.setVulnerabilities(newInformation.getVulnerabilities());</b>
+<b class="nc">&nbsp;                thresholdEntity.setCodeSmell(newInformation.getCodeSmell());</b>
+<b class="nc">&nbsp;                thresholdEntity.setTestCoverage(newInformation.getTestCoverage());</b>
+<b class="nc">&nbsp;                thresholdEntity.setDuplicatedLines(newInformation.getDuplicatedLines());</b>
+<b class="nc">&nbsp;                thresholdEntity.setCyclomaticComplexity(newInformation.getCyclomaticComplexity());</b>
+<b class="nc">&nbsp;                thresholdEntity.setDocumentedLines(newInformation.getDocumentedLines());</b>
+<b class="nc">&nbsp;                thresholdEntity.setCyclicDependency(newInformation.getCyclicDependency());</b>
+<b class="nc">&nbsp;                thresholdEntity.setGodComponents(newInformation.getGodComponents());</b>
+<b class="nc">&nbsp;                thresholdEntity.setCycDependentMod(newInformation.getCycDependentMod());</b>
+<b class="nc">&nbsp;                thresholdEntity.setInsufficientModularization(newInformation.getInsufficientModularization());</b>
+<b class="nc">&nbsp;                thresholdEntity.setUnnecessaryAbstraction(newInformation.getUnnecessaryAbstraction());</b>
+<b class="nc">&nbsp;                thresholdEntity.setComplexConditional(newInformation.getComplexConditional());</b>
+<b class="nc">&nbsp;                thresholdEntity.setEmptyCatchClause(newInformation.getEmptyCatchClause());</b>
+<b class="nc">&nbsp;                thresholdEntity.setMissingAssertion(newInformation.getMissingAssertion());</b>
+<b class="nc">&nbsp;                thresholdEntity.setEmptyTest(newInformation.getEmptyTest());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            ThresholdEntity savedEntity = thresholdRepository.save(thresholdEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;updateThresholdByID : Updating the threshold information with repositoryID {}&quot;, repositoryID);</b>
+<b class="nc">&nbsp;            thresholdDTO = convertThresholdEntityToDTO(savedEntity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return thresholdDTO;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ThresholdDTO getThresholdByID(int repositoryID) {
+<b class="nc">&nbsp;        ThresholdDTO thresholdDTO = null;</b>
+<b class="nc">&nbsp;        ThresholdEntity thresholdEntity = thresholdRepository.findByRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;        if (thresholdEntity != null) {</b>
+<b class="nc">&nbsp;            thresholdDTO = convertThresholdEntityToDTO(thresholdEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;getThresholdByID : Successfully retrieved threshold with repositoryID {}&quot;, repositoryID);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;getThresholdByID : Threshold Entity with repositoryID {} not found&quot;, repositoryID);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return thresholdDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private ThresholdEntity convertThresholdDtoToEntity(ThresholdDTO thresholdDTO, int repositoryID) {
+<b class="nc">&nbsp;        ThresholdEntity thresholdEntity = new ThresholdEntity();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (thresholdDTO != null) {</b>
+<b class="nc">&nbsp;            if (repositoryID != 0) {</b>
+<b class="nc">&nbsp;                RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;                repositoryEntity.setRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;                thresholdEntity.setRepositoryIdInThreshold(repositoryEntity);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            thresholdEntity.setBugs(thresholdDTO.getBugs());</b>
+<b class="nc">&nbsp;            thresholdEntity.setVulnerabilities(thresholdDTO.getVulnerabilities());</b>
+<b class="nc">&nbsp;            thresholdEntity.setCodeSmell(thresholdDTO.getCodeSmell());</b>
+<b class="nc">&nbsp;            thresholdEntity.setTestCoverage(thresholdDTO.getTestCoverage());</b>
+<b class="nc">&nbsp;            thresholdEntity.setDuplicatedLines(thresholdDTO.getDuplicatedLines());</b>
+<b class="nc">&nbsp;            thresholdEntity.setCyclomaticComplexity(thresholdDTO.getCyclomaticComplexity());</b>
+<b class="nc">&nbsp;            thresholdEntity.setDocumentedLines(thresholdDTO.getDocumentedLines());</b>
+<b class="nc">&nbsp;            thresholdEntity.setCyclicDependency(thresholdDTO.getCyclicDependency());</b>
+<b class="nc">&nbsp;            thresholdEntity.setGodComponents(thresholdDTO.getGodComponents());</b>
+<b class="nc">&nbsp;            thresholdEntity.setCycDependentMod(thresholdDTO.getCycDependentMod());</b>
+<b class="nc">&nbsp;            thresholdEntity.setInsufficientModularization(thresholdDTO.getInsufficientModularization());</b>
+<b class="nc">&nbsp;            thresholdEntity.setUnnecessaryAbstraction(thresholdDTO.getUnnecessaryAbstraction());</b>
+<b class="nc">&nbsp;            thresholdEntity.setComplexConditional(thresholdDTO.getComplexConditional());</b>
+<b class="nc">&nbsp;            thresholdEntity.setEmptyCatchClause(thresholdDTO.getEmptyCatchClause());</b>
+<b class="nc">&nbsp;            thresholdEntity.setMissingAssertion(thresholdDTO.getMissingAssertion());</b>
+<b class="nc">&nbsp;            thresholdEntity.setEmptyTest(thresholdDTO.getEmptyTest());</b>
+<b class="nc">&nbsp;            thresholdEntity.setArchSmellDensity(thresholdDTO.getArchSmellDensity());</b>
+<b class="nc">&nbsp;            thresholdEntity.setDesignSmellDensity(thresholdDTO.getDesignSmellDensity());</b>
+<b class="nc">&nbsp;            thresholdEntity.setImpSmellDensity(thresholdDTO.getImpSmellDensity());</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertThresholdDtoToEntity : Converted Threshold DTO to Entity {}&quot;, thresholdEntity);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertThresholdDtoToEntity : ThresholdDTO value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return thresholdEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private ThresholdDTO convertThresholdEntityToDTO(ThresholdEntity thresholdEntity) {
+<b class="nc">&nbsp;        ThresholdDTO thresholdDTO = null;</b>
+<b class="nc">&nbsp;        if (thresholdEntity != null) {</b>
+<b class="nc">&nbsp;            thresholdDTO = new ThresholdDTO();</b>
+<b class="nc">&nbsp;            thresholdDTO.setBugs(thresholdEntity.getBugs());</b>
+<b class="nc">&nbsp;            thresholdDTO.setVulnerabilities(thresholdEntity.getVulnerabilities());</b>
+<b class="nc">&nbsp;            thresholdDTO.setCodeSmell(thresholdEntity.getCodeSmell());</b>
+<b class="nc">&nbsp;            thresholdDTO.setTestCoverage(thresholdEntity.getTestCoverage());</b>
+<b class="nc">&nbsp;            thresholdDTO.setDuplicatedLines(thresholdEntity.getDuplicatedLines());</b>
+<b class="nc">&nbsp;            thresholdDTO.setCyclomaticComplexity(thresholdEntity.getCyclomaticComplexity());</b>
+<b class="nc">&nbsp;            thresholdDTO.setDocumentedLines(thresholdEntity.getDocumentedLines());</b>
+<b class="nc">&nbsp;            thresholdDTO.setCyclicDependency(thresholdEntity.getCyclicDependency());</b>
+<b class="nc">&nbsp;            thresholdDTO.setGodComponents(thresholdEntity.getGodComponents());</b>
+<b class="nc">&nbsp;            thresholdDTO.setCycDependentMod(thresholdEntity.getCycDependentMod());</b>
+<b class="nc">&nbsp;            thresholdDTO.setInsufficientModularization(thresholdEntity.getInsufficientModularization());</b>
+<b class="nc">&nbsp;            thresholdDTO.setUnnecessaryAbstraction(thresholdEntity.getUnnecessaryAbstraction());</b>
+<b class="nc">&nbsp;            thresholdDTO.setComplexConditional(thresholdEntity.getComplexConditional());</b>
+<b class="nc">&nbsp;            thresholdDTO.setEmptyCatchClause(thresholdEntity.getEmptyCatchClause());</b>
+<b class="nc">&nbsp;            thresholdDTO.setMissingAssertion(thresholdEntity.getMissingAssertion());</b>
+<b class="nc">&nbsp;            thresholdDTO.setEmptyTest(thresholdEntity.getEmptyTest());</b>
+<b class="nc">&nbsp;            thresholdDTO.setArchSmellDensity(thresholdEntity.getArchSmellDensity());</b>
+<b class="nc">&nbsp;            thresholdDTO.setDesignSmellDensity(thresholdEntity.getDesignSmellDensity());</b>
+<b class="nc">&nbsp;            thresholdDTO.setImpSmellDensity(thresholdEntity.getImpSmellDensity());</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertThresholdDtoToEntity : Converted Threshold Entity to DTO {}&quot;, thresholdDTO);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertThresholdDtoToEntity : Threshold Entity is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return thresholdDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 13:55</div>
+</div>
+</body>
+</html>

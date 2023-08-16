@@ -1,0 +1,53 @@
+name: Designite Workflow
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set build system
+        id: set-build-system
+        run: |
+          if [[ -f pom.xml ]]; then
+            echo "::set-output name=build-system::maven"
+          elif [[ -f build.gradle ]]; then
+            echo "::set-output name=build-system::gradle"
+          else
+            echo "Build system not found"
+            exit 1
+          fi
+      - name: Build with Maven
+        run: |
+          if [[ "${{ steps.set-build-system.outputs.build-system }}" == "maven" ]]; then
+            mvn clean install
+          fi
+      - name: Build with Gradle
+        run: |
+          if [[ "${{ steps.set-build-system.outputs.build-system }}" == "gradle" ]]; then
+            ./gradlew build
+          fi
+      - name: Download DesigniteJava
+        run: wget "https://www.designite-tools.com/static/download/DJE/DesigniteJava.jar"
+      - name: Analyze project with DesigniteJava
+        run: |
+          java -jar DesigniteJava.jar -ci -repo $GITHUB_REPOSITORY -pat ${{ secrets.PAT }}
+          ls
+      - name: Upload Designite results as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: DesigniteAnalysis
+          path: Designite_output/DesigniteAnalysis.xml
+      - name: Download DesigniteAnalysis artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: DesigniteAnalysis
+          path: Designite_output
+      - name: Send DesigniteAnalysis.xml to Analysis controller
+        run: |
+          curl -X POST -F 'file=@Designite_output/DesigniteAnalysis.xml' http://csci5308vm19.research.cs.dal.ca:8080/analysis/${{github.repository_id}}/${{github.ref_name}}

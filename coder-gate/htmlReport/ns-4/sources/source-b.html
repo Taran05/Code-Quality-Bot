@@ -1,0 +1,303 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Project</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.analysis</a>
+</div>
+
+<h1>Coverage Summary for Class: Project (com.github.codergate.dto.analysis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Project</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.analysis;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;Name&quot;,
+&nbsp;    &quot;LOC&quot;,
+&nbsp;    &quot;ComponentCount&quot;,
+&nbsp;    &quot;TypeCount&quot;,
+&nbsp;    &quot;MethodCount&quot;,
+&nbsp;    &quot;SmellDensity&quot;,
+&nbsp;    &quot;CodeDuplication&quot;,
+&nbsp;    &quot;MetricVoilations&quot;,
+&nbsp;    &quot;TotalArchSmellCount&quot;,
+&nbsp;    &quot;TotalDesignSmellCount&quot;,
+&nbsp;    &quot;TotalImplSmellCount&quot;,
+&nbsp;    &quot;DesignSmells&quot;,
+&nbsp;    &quot;ImplementationSmells&quot;,
+&nbsp;    &quot;ArchSmells&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class Project implements Serializable</b>
+&nbsp;{
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    private String name;
+&nbsp;    @JsonProperty(&quot;LOC&quot;)
+&nbsp;    private Integer loc;
+&nbsp;    @JsonProperty(&quot;ComponentCount&quot;)
+&nbsp;    private Integer componentCount;
+&nbsp;    @JsonProperty(&quot;TypeCount&quot;)
+&nbsp;    private Integer typeCount;
+&nbsp;    @JsonProperty(&quot;MethodCount&quot;)
+&nbsp;    private Integer methodCount;
+&nbsp;    @JsonProperty(&quot;SmellDensity&quot;)
+&nbsp;    private Double smellDensity;
+&nbsp;    @JsonProperty(&quot;CodeDuplication&quot;)
+&nbsp;    private Integer codeDuplication;
+&nbsp;    @JsonProperty(&quot;MetricVoilations&quot;)
+&nbsp;    private Integer metricVoilations;
+&nbsp;    @JsonProperty(&quot;TotalArchSmellCount&quot;)
+&nbsp;    private Integer totalArchSmellCount;
+&nbsp;    @JsonProperty(&quot;TotalDesignSmellCount&quot;)
+&nbsp;    private Integer totalDesignSmellCount;
+&nbsp;    @JsonProperty(&quot;TotalImplSmellCount&quot;)
+&nbsp;    private Integer totalImplSmellCount;
+&nbsp;    @JsonProperty(&quot;DesignSmells&quot;)
+&nbsp;    private DesignSmells designSmells;
+&nbsp;    @JsonProperty(&quot;ImplementationSmells&quot;)
+&nbsp;    private ImplementationSmells implementationSmells;
+&nbsp;    @JsonProperty(&quot;ArchSmells&quot;)
+&nbsp;    private ArchSmells archSmells;
+&nbsp;    private final static long serialVersionUID = 8751213633971888939L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;LOC&quot;)
+&nbsp;    public Integer getLoc() {
+<b class="nc">&nbsp;        return loc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;LOC&quot;)
+&nbsp;    public void setLoc(Integer loc) {
+<b class="nc">&nbsp;        this.loc = loc;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ComponentCount&quot;)
+&nbsp;    public Integer getComponentCount() {
+<b class="nc">&nbsp;        return componentCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ComponentCount&quot;)
+&nbsp;    public void setComponentCount(Integer componentCount) {
+<b class="nc">&nbsp;        this.componentCount = componentCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TypeCount&quot;)
+&nbsp;    public Integer getTypeCount() {
+<b class="nc">&nbsp;        return typeCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TypeCount&quot;)
+&nbsp;    public void setTypeCount(Integer typeCount) {
+<b class="nc">&nbsp;        this.typeCount = typeCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;MethodCount&quot;)
+&nbsp;    public Integer getMethodCount() {
+<b class="nc">&nbsp;        return methodCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;MethodCount&quot;)
+&nbsp;    public void setMethodCount(Integer methodCount) {
+<b class="nc">&nbsp;        this.methodCount = methodCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;SmellDensity&quot;)
+&nbsp;    public Double getSmellDensity() {
+<b class="nc">&nbsp;        return smellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;SmellDensity&quot;)
+&nbsp;    public void setSmellDensity(Double smellDensity) {
+<b class="nc">&nbsp;        this.smellDensity = smellDensity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;CodeDuplication&quot;)
+&nbsp;    public Integer getCodeDuplication() {
+<b class="nc">&nbsp;        return codeDuplication;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;CodeDuplication&quot;)
+&nbsp;    public void setCodeDuplication(Integer codeDuplication) {
+<b class="nc">&nbsp;        this.codeDuplication = codeDuplication;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;MetricVoilations&quot;)
+&nbsp;    public Integer getMetricVoilations() {
+<b class="nc">&nbsp;        return metricVoilations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;MetricVoilations&quot;)
+&nbsp;    public void setMetricVoilations(Integer metricVoilations) {
+<b class="nc">&nbsp;        this.metricVoilations = metricVoilations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalArchSmellCount&quot;)
+&nbsp;    public Integer getTotalArchSmellCount() {
+<b class="nc">&nbsp;        return totalArchSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalArchSmellCount&quot;)
+&nbsp;    public void setTotalArchSmellCount(Integer totalArchSmellCount) {
+<b class="nc">&nbsp;        this.totalArchSmellCount = totalArchSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalDesignSmellCount&quot;)
+&nbsp;    public Integer getTotalDesignSmellCount() {
+<b class="nc">&nbsp;        return totalDesignSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalDesignSmellCount&quot;)
+&nbsp;    public void setTotalDesignSmellCount(Integer totalDesignSmellCount) {
+<b class="nc">&nbsp;        this.totalDesignSmellCount = totalDesignSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalImplSmellCount&quot;)
+&nbsp;    public Integer getTotalImplSmellCount() {
+<b class="nc">&nbsp;        return totalImplSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;TotalImplSmellCount&quot;)
+&nbsp;    public void setTotalImplSmellCount(Integer totalImplSmellCount) {
+<b class="nc">&nbsp;        this.totalImplSmellCount = totalImplSmellCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;DesignSmells&quot;)
+&nbsp;    public DesignSmells getDesignSmells() {
+<b class="nc">&nbsp;        return designSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;DesignSmells&quot;)
+&nbsp;    public void setDesignSmells(DesignSmells designSmells) {
+<b class="nc">&nbsp;        this.designSmells = designSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ImplementationSmells&quot;)
+&nbsp;    public ImplementationSmells getImplementationSmells() {
+<b class="nc">&nbsp;        return implementationSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ImplementationSmells&quot;)
+&nbsp;    public void setImplementationSmells(ImplementationSmells implementationSmells) {
+<b class="nc">&nbsp;        this.implementationSmells = implementationSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ArchSmells&quot;)
+&nbsp;    public ArchSmells getArchSmells() {
+<b class="nc">&nbsp;        return archSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ArchSmells&quot;)
+&nbsp;    public void setArchSmells(ArchSmells archSmells) {
+<b class="nc">&nbsp;        this.archSmells = archSmells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

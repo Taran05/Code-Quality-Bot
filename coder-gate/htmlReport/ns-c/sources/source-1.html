@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnalysisEntity</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: AnalysisEntity (com.github.codergate.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnalysisEntity</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.7%
+  </span>
+  <span class="absValue">
+    (1/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.9%
+  </span>
+  <span class="absValue">
+    (1/34)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnalysisEntity$HibernateProxy$ORZKf3vL</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    3.7%
+  </span>
+  <span class="absValue">
+    (1/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.9%
+  </span>
+  <span class="absValue">
+    (1/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.entities;
+&nbsp;
+&nbsp;import javax.persistence.Column;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;import javax.persistence.JoinColumn;
+&nbsp;import javax.persistence.ManyToOne;
+&nbsp;import javax.persistence.Table;
+&nbsp;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Getter;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;import lombok.Setter;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Analysis&quot;)
+&nbsp;@Getter
+<b class="nc">&nbsp;@Setter</b>
+<b class="fc">&nbsp;@NoArgsConstructor</b>
+<b class="nc">&nbsp;@AllArgsConstructor</b>
+&nbsp;public class AnalysisEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;analysisid&quot;)
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="nc">&nbsp;    private int id;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;analysis_type&quot;)
+<b class="nc">&nbsp;    private String type;</b>
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;branchId&quot;)
+&nbsp;    @JoinColumn(name = &quot;repositoryId&quot;)
+<b class="nc">&nbsp;    private BranchEntity branchId;</b>
+&nbsp;
+<b class="nc">&nbsp;    private int bugs;</b>
+<b class="nc">&nbsp;    private int vulnerabilities;</b>
+<b class="nc">&nbsp;    private double codeSmell;</b>
+<b class="nc">&nbsp;    private double testCoverage;</b>
+<b class="nc">&nbsp;    private double duplicatedLines;</b>
+<b class="nc">&nbsp;    private double cyclomaticComplexity;</b>
+<b class="nc">&nbsp;    private double documentedLines;</b>
+&nbsp;
+&nbsp;    // Architecture Smells
+<b class="nc">&nbsp;    private int cyclicDependency;</b>
+<b class="nc">&nbsp;    private int godComponents;</b>
+&nbsp;
+&nbsp;    // Design Smells
+<b class="nc">&nbsp;    private int cyclicallyDependentModularization;</b>
+<b class="nc">&nbsp;    private int insufficientModularization;</b>
+<b class="nc">&nbsp;    private int unnecessaryAbstraction;</b>
+&nbsp;
+&nbsp;    // Implementation Smells
+<b class="nc">&nbsp;    private int complexConditional;</b>
+<b class="nc">&nbsp;    private int emptyCatchClause;</b>
+&nbsp;
+&nbsp;    // Test Smells
+<b class="nc">&nbsp;    private int missingAssertion;</b>
+<b class="nc">&nbsp;    private int emptyTest;</b>
+&nbsp;
+&nbsp;    // Densities
+<b class="nc">&nbsp;    private double archSmellDensity;</b>
+<b class="nc">&nbsp;    private double designSmellDensity;</b>
+<b class="nc">&nbsp;    private double impSmellDensity;</b>
+&nbsp;
+&nbsp;    // Timestamp
+<b class="nc">&nbsp;    private long timestamp;</b>
+&nbsp;
+&nbsp;    public AnalysisEntity(int repoId, String branchName,
+<b class="nc">&nbsp;                          long timestamp) {</b>
+<b class="nc">&nbsp;        BranchEntity branch = new BranchEntity();</b>
+<b class="nc">&nbsp;        branch.setBranchId(new BranchId(repoId, branchName));</b>
+<b class="nc">&nbsp;        RepositoryEntity repositoryEntity = new RepositoryEntity();</b>
+<b class="nc">&nbsp;        repositoryEntity.setRepositoryId(repoId);</b>
+<b class="nc">&nbsp;        branch.setRepositoryIdInBranch(repositoryEntity);</b>
+<b class="nc">&nbsp;        this.branchId = branch;</b>
+<b class="nc">&nbsp;        this.timestamp = timestamp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ArchSmell</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.dto.analysis</a>
+</div>
+
+<h1>Coverage Summary for Class: ArchSmell (com.github.codergate.dto.analysis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArchSmell</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package com.github.codergate.dto.analysis;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonInclude;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+&nbsp;
+&nbsp;@JsonInclude(JsonInclude.Include.NON_NULL)
+&nbsp;@JsonPropertyOrder({
+&nbsp;    &quot;Name&quot;,
+&nbsp;    &quot;Description&quot;,
+&nbsp;    &quot;Entity&quot;,
+&nbsp;    &quot;ResponsibleClasses&quot;
+&nbsp;})
+<b class="nc">&nbsp;public class ArchSmell implements Serializable</b>
+&nbsp;{
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    private String name;
+&nbsp;    @JsonProperty(&quot;Description&quot;)
+&nbsp;    private String description;
+&nbsp;    @JsonProperty(&quot;Entity&quot;)
+&nbsp;    private Entity entity;
+&nbsp;    @JsonProperty(&quot;ResponsibleClasses&quot;)
+&nbsp;    private String responsibleClasses;
+&nbsp;    private final static long serialVersionUID = -7014946052825035518L;
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    public String getName() {
+<b class="nc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Name&quot;)
+&nbsp;    public void setName(String name) {
+<b class="nc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Description&quot;)
+&nbsp;    public String getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Description&quot;)
+&nbsp;    public void setDescription(String description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Entity&quot;)
+&nbsp;    public Entity getEntity() {
+<b class="nc">&nbsp;        return entity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;Entity&quot;)
+&nbsp;    public void setEntity(Entity entity) {
+<b class="nc">&nbsp;        this.entity = entity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ResponsibleClasses&quot;)
+&nbsp;    public String getResponsibleClasses() {
+<b class="nc">&nbsp;        return responsibleClasses;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @JsonProperty(&quot;ResponsibleClasses&quot;)
+&nbsp;    public void setResponsibleClasses(String responsibleClasses) {
+<b class="nc">&nbsp;        this.responsibleClasses = responsibleClasses;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>

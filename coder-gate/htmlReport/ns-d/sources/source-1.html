@@ -1,0 +1,567 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnalysisService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.codergate.services</a>
+</div>
+
+<h1>Coverage Summary for Class: AnalysisService (com.github.codergate.services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnalysisService</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.8%
+  </span>
+  <span class="absValue">
+    (2/248)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnalysisService$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (2/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.8%
+  </span>
+  <span class="absValue">
+    (2/249)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.codergate.services;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;import org.json.JSONObject;
+&nbsp;import org.json.XML;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.web.multipart.MultipartFile;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.core.type.TypeReference;
+&nbsp;import com.github.codergate.dto.analysis.AnalysisDTO;
+&nbsp;import com.github.codergate.dto.analysis.ArchSmell;
+&nbsp;import com.github.codergate.dto.analysis.DesignSmell;
+&nbsp;import com.github.codergate.dto.analysis.Designate;
+&nbsp;import com.github.codergate.dto.analysis.ImplementationSmell;
+&nbsp;import com.github.codergate.dto.analysis.Project;
+&nbsp;import com.github.codergate.dto.analysis.Solution;
+&nbsp;import com.github.codergate.entities.AnalysisEntity;
+&nbsp;import com.github.codergate.entities.BranchEntity;
+&nbsp;import com.github.codergate.repositories.AnalysisRepository;
+&nbsp;import com.github.codergate.utils.Mapper;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class AnalysisService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AnalysisRepository analysisRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    BranchService branchService;
+&nbsp;
+&nbsp;    private static final int HUNDRED = 100;
+&nbsp;    private static final String NAME = &quot;Name&quot;;
+&nbsp;    private static final String GOD_COMPONENT = &quot;God Component&quot;;
+&nbsp;    private static final String COMPLEX_METHOD = &quot;Complex Method&quot;;
+&nbsp;    private static final String CYC_DEPENDENCY = &quot;Cyclic Dependency&quot;;
+&nbsp;    private static final String EMPTY_CATCH_CLAUSE = &quot;Empty Catch Clause&quot;;
+&nbsp;    private static final String COMPLEX_CONDITIONAL = &quot;Complex Conditional&quot;;
+&nbsp;    private static final String UNNECESSARY_ABST = &quot;Unnecessary Abstraction&quot;;
+&nbsp;    private static final String INSUFFICIENT_MOD = &quot;Insufficient Modularization&quot;;
+&nbsp;    private static final String CYC_DEPENDENT_MOD = &quot;Cyclically-dependent Modularization&quot;;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger LOGGER = LoggerFactory.getLogger(AnalysisService.class);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param repositoryID
+&nbsp;     * @return AnalysisDTO
+&nbsp;     */
+&nbsp;    public AnalysisDTO getAnalysisByID(int repositoryID) {
+<b class="nc">&nbsp;        AnalysisDTO analysisDTO = null;</b>
+<b class="nc">&nbsp;        AnalysisEntity analysisEntity = analysisRepository.findAnalysisByRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;        if (analysisEntity != null) {</b>
+<b class="nc">&nbsp;            analysisDTO = convertAnalysisEntityToDto(analysisEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;getAnalysisByID : Successfully retrieved latest analysis with repositoryID {}&quot;, repositoryID);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;getAnalysisByID : Analysis with repositoryID {} not found&quot;, repositoryID);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return analysisDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnalysisDTO getLatestAnalysis(int repoId) {
+<b class="nc">&nbsp;        return convertAnalysisEntityToDto(analysisRepository.findLatestAnalysisByRepositoryId(repoId));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param repositoryID
+&nbsp;     * @param newInformation
+&nbsp;     * @return AnalysisDTO
+&nbsp;     */
+&nbsp;    public AnalysisDTO updateAnalysisByRepositoryID(int repositoryID, AnalysisDTO newInformation) {
+<b class="nc">&nbsp;        AnalysisDTO analysisDTO = null;</b>
+<b class="nc">&nbsp;        AnalysisEntity analysisEntity = analysisRepository.findLatestAnalysisByRepositoryId(repositoryID);</b>
+<b class="nc">&nbsp;        if (analysisEntity != null) {</b>
+<b class="nc">&nbsp;            if (newInformation != null) {</b>
+<b class="nc">&nbsp;                if (newInformation.getAnalysisType() != null) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setType(newInformation.getAnalysisType());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getBugs() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setBugs(newInformation.getBugs());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getVulnerabilities() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setVulnerabilities(newInformation.getVulnerabilities());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getCodeSmell() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setCodeSmell(newInformation.getCodeSmell());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getTestCoverage() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setTestCoverage(newInformation.getTestCoverage());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getDuplicatedLines() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setDuplicatedLines(newInformation.getDuplicatedLines());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getCyclomaticComplexity() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setCyclomaticComplexity(newInformation.getCyclomaticComplexity());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getDocumentedLines() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setDocumentedLines(newInformation.getDocumentedLines());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getCyclicDependency() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setCyclicDependency(newInformation.getCyclicDependency());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getGodComponents() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setGodComponents(newInformation.getGodComponents());</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                if (newInformation.getInsufficientModularization() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setInsufficientModularization(newInformation.getInsufficientModularization());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getUnnecessaryAbstraction() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setUnnecessaryAbstraction(newInformation.getUnnecessaryAbstraction());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getComplexConditional() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setComplexConditional(newInformation.getComplexConditional());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getEmptyCatchClause() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setEmptyCatchClause(newInformation.getEmptyCatchClause());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getMissingAssertion() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setMissingAssertion(newInformation.getMissingAssertion());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getEmptyTest() != 0) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setEmptyTest(newInformation.getEmptyTest());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getArchSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setArchSmellDensity(newInformation.getArchSmellDensity());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getDesignSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setDesignSmellDensity(newInformation.getDesignSmellDensity());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if (newInformation.getImpSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                    analysisEntity.setImpSmellDensity(newInformation.getImpSmellDensity());</b>
+&nbsp;                }
+&nbsp;                // Date date = new Date();
+&nbsp;                // analysisEntity.setTimestamp(date.getTime());
+<b class="nc">&nbsp;                analysisEntity.setType(newInformation.getAnalysisType());</b>
+<b class="nc">&nbsp;                analysisEntity.setBugs(newInformation.getBugs());</b>
+<b class="nc">&nbsp;                analysisEntity.setVulnerabilities(newInformation.getVulnerabilities());</b>
+<b class="nc">&nbsp;                analysisEntity.setCodeSmell(newInformation.getCodeSmell());</b>
+<b class="nc">&nbsp;                analysisEntity.setTestCoverage(newInformation.getTestCoverage());</b>
+<b class="nc">&nbsp;                analysisEntity.setDuplicatedLines(newInformation.getDuplicatedLines());</b>
+<b class="nc">&nbsp;                analysisEntity.setCyclomaticComplexity(newInformation.getCyclomaticComplexity());</b>
+<b class="nc">&nbsp;                analysisEntity.setDocumentedLines(newInformation.getDocumentedLines());</b>
+<b class="nc">&nbsp;                analysisEntity.setCyclicDependency(newInformation.getCyclicDependency());</b>
+<b class="nc">&nbsp;                analysisEntity.setGodComponents(newInformation.getGodComponents());</b>
+<b class="nc">&nbsp;                analysisEntity.setCyclicallyDependentModularization(newInformation.getCycDependentMod());</b>
+<b class="nc">&nbsp;                analysisEntity.setInsufficientModularization(newInformation.getInsufficientModularization());</b>
+<b class="nc">&nbsp;                analysisEntity.setUnnecessaryAbstraction(newInformation.getUnnecessaryAbstraction());</b>
+<b class="nc">&nbsp;                analysisEntity.setComplexConditional(newInformation.getComplexConditional());</b>
+<b class="nc">&nbsp;                analysisEntity.setEmptyCatchClause(newInformation.getEmptyCatchClause());</b>
+<b class="nc">&nbsp;                analysisEntity.setMissingAssertion(newInformation.getMissingAssertion());</b>
+<b class="nc">&nbsp;                analysisEntity.setEmptyTest(newInformation.getEmptyTest());</b>
+<b class="nc">&nbsp;                analysisEntity.setTimestamp(new Date().getTime());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            AnalysisEntity savedEntity = analysisRepository.save(analysisEntity);</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;updateAnalysisByID : Updating the analysis information with repositoryID {}&quot;, repositoryID);</b>
+<b class="nc">&nbsp;            analysisDTO = convertAnalysisEntityToDto(savedEntity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return analysisDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnalysisEntity convertAnalysisDtoToEntity(AnalysisDTO analysisDTO) {
+<b class="nc">&nbsp;        AnalysisEntity analysisEntity = null;</b>
+<b class="nc">&nbsp;        if (analysisDTO != null) {</b>
+<b class="nc">&nbsp;            analysisEntity = new AnalysisEntity();</b>
+<b class="nc">&nbsp;            if (analysisDTO.getAnalysisType() != null) {</b>
+<b class="nc">&nbsp;                analysisEntity.setType(analysisDTO.getAnalysisType());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getBugs() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setBugs(analysisDTO.getBugs());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getVulnerabilities() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setVulnerabilities(analysisDTO.getVulnerabilities());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getCodeSmell() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setCodeSmell(analysisDTO.getCodeSmell());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getTestCoverage() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setTestCoverage(analysisDTO.getTestCoverage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getDuplicatedLines() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setDuplicatedLines(analysisDTO.getDuplicatedLines());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getCyclomaticComplexity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setCyclomaticComplexity(analysisDTO.getCyclomaticComplexity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getDocumentedLines() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setDocumentedLines(analysisDTO.getDocumentedLines());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getCyclicDependency() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setCyclicDependency(analysisDTO.getCyclicDependency());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getGodComponents() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setGodComponents(analysisDTO.getGodComponents());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (analysisDTO.getInsufficientModularization() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setInsufficientModularization(analysisDTO.getInsufficientModularization());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getUnnecessaryAbstraction() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setUnnecessaryAbstraction(analysisDTO.getUnnecessaryAbstraction());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getComplexConditional() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setComplexConditional(analysisDTO.getComplexConditional());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getEmptyCatchClause() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setEmptyCatchClause(analysisDTO.getEmptyCatchClause());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getMissingAssertion() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setMissingAssertion(analysisDTO.getMissingAssertion());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getEmptyTest() != 0) {</b>
+<b class="nc">&nbsp;                analysisEntity.setEmptyTest(analysisDTO.getEmptyTest());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getArchSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setArchSmellDensity(analysisDTO.getArchSmellDensity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getDesignSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setDesignSmellDensity(analysisDTO.getDesignSmellDensity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisDTO.getImpSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisEntity.setImpSmellDensity(analysisDTO.getImpSmellDensity());</b>
+&nbsp;            }
+&nbsp;            // Date date = new Date();
+&nbsp;            // analysisEntity.setTimestamp(date.getTime());
+<b class="nc">&nbsp;            analysisEntity.setType(analysisDTO.getAnalysisType());</b>
+<b class="nc">&nbsp;            analysisEntity.setBugs(analysisDTO.getBugs());</b>
+<b class="nc">&nbsp;            analysisEntity.setVulnerabilities(analysisDTO.getVulnerabilities());</b>
+<b class="nc">&nbsp;            analysisEntity.setCodeSmell(analysisDTO.getCodeSmell());</b>
+<b class="nc">&nbsp;            analysisEntity.setTestCoverage(analysisDTO.getTestCoverage());</b>
+<b class="nc">&nbsp;            analysisEntity.setDuplicatedLines(analysisDTO.getDuplicatedLines());</b>
+<b class="nc">&nbsp;            analysisEntity.setCyclomaticComplexity(analysisDTO.getCyclomaticComplexity());</b>
+<b class="nc">&nbsp;            analysisEntity.setDocumentedLines(analysisDTO.getDocumentedLines());</b>
+<b class="nc">&nbsp;            analysisEntity.setCyclicDependency(analysisDTO.getCyclicDependency());</b>
+<b class="nc">&nbsp;            analysisEntity.setGodComponents(analysisDTO.getGodComponents());</b>
+<b class="nc">&nbsp;            analysisEntity.setCyclicallyDependentModularization(analysisDTO.getCycDependentMod());</b>
+<b class="nc">&nbsp;            analysisEntity.setInsufficientModularization(analysisDTO.getInsufficientModularization());</b>
+<b class="nc">&nbsp;            analysisEntity.setUnnecessaryAbstraction(analysisDTO.getUnnecessaryAbstraction());</b>
+<b class="nc">&nbsp;            analysisEntity.setComplexConditional(analysisDTO.getComplexConditional());</b>
+<b class="nc">&nbsp;            analysisEntity.setEmptyCatchClause(analysisDTO.getEmptyCatchClause());</b>
+<b class="nc">&nbsp;            analysisEntity.setMissingAssertion(analysisDTO.getMissingAssertion());</b>
+<b class="nc">&nbsp;            analysisEntity.setEmptyTest(analysisDTO.getEmptyTest());</b>
+<b class="nc">&nbsp;            analysisEntity.setTimestamp(new Date().getTime());</b>
+<b class="nc">&nbsp;            analysisEntity.setBranchId(new BranchEntity(null, null));</b>
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertAnalysisDtoToEntity : Converted AnalysisDTO to Entity {}&quot;, analysisEntity);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            LOGGER.warn(&quot;convertAnalysisDtoToEntity : AnalysisDTO value is null&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return analysisEntity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param analysisEntity
+&nbsp;     * @return AnalysisDTO
+&nbsp;     */
+&nbsp;    public AnalysisDTO convertAnalysisEntityToDto(AnalysisEntity analysisEntity) {
+<b class="nc">&nbsp;        AnalysisDTO analysisDTO = new AnalysisDTO();</b>
+<b class="nc">&nbsp;        if (analysisEntity != null) {</b>
+<b class="nc">&nbsp;            if (analysisEntity.getType() != null) {</b>
+<b class="nc">&nbsp;                analysisDTO.setAnalysisType(analysisEntity.getType());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getBugs() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setBugs(analysisEntity.getBugs());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getVulnerabilities() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setVulnerabilities(analysisEntity.getVulnerabilities());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getCodeSmell() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setCodeSmell(analysisEntity.getCodeSmell());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getTestCoverage() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setTestCoverage(analysisEntity.getTestCoverage());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getDuplicatedLines() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setDuplicatedLines(analysisEntity.getDuplicatedLines());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getCyclomaticComplexity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setCyclomaticComplexity(analysisEntity.getCyclomaticComplexity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getDocumentedLines() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setDocumentedLines(analysisEntity.getDocumentedLines());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getCyclicDependency() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setCyclicDependency(analysisEntity.getCyclicDependency());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getGodComponents() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setGodComponents(analysisEntity.getGodComponents());</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (analysisEntity.getInsufficientModularization() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setInsufficientModularization(analysisEntity.getInsufficientModularization());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getUnnecessaryAbstraction() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setUnnecessaryAbstraction(analysisEntity.getUnnecessaryAbstraction());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getComplexConditional() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setComplexConditional(analysisEntity.getComplexConditional());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getEmptyCatchClause() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setEmptyCatchClause(analysisEntity.getEmptyCatchClause());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getMissingAssertion() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setMissingAssertion(analysisEntity.getMissingAssertion());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getEmptyTest() != 0) {</b>
+<b class="nc">&nbsp;                analysisDTO.setEmptyTest(analysisEntity.getEmptyTest());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getArchSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setArchSmellDensity(analysisEntity.getArchSmellDensity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getDesignSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setDesignSmellDensity(analysisEntity.getDesignSmellDensity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getImpSmellDensity() != 0D) {</b>
+<b class="nc">&nbsp;                analysisDTO.setImpSmellDensity(analysisEntity.getImpSmellDensity());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if (analysisEntity.getTimestamp() != 0L) {</b>
+<b class="nc">&nbsp;                analysisDTO.setTimestamp(analysisEntity.getTimestamp());</b>
+&nbsp;            }
+<b class="nc">&nbsp;            LOGGER.info(&quot;convertAnalysisDtoToEntity : Converted Analysis Entity to DTO {}&quot;, analysisDTO);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        LOGGER.info(&quot;convertAnalysisDtoToEntity :: Exiting the method with {}&quot;, analysisDTO);</b>
+<b class="nc">&nbsp;        return analysisDTO;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param file
+&nbsp;     * @param repoId
+&nbsp;     * @param branchName
+&nbsp;     * @return AnalysisEntity
+&nbsp;     * @throws IOException
+&nbsp;     */
+&nbsp;    public AnalysisEntity processAnalysis(MultipartFile file, int repoId, String branchName) throws IOException {
+<b class="nc">&nbsp;        AnalysisEntity processedAnalysis = null;</b>
+<b class="nc">&nbsp;        try (InputStream inputStream = file.getInputStream()) {</b>
+<b class="nc">&nbsp;            String xml = new String(inputStream.readAllBytes());</b>
+<b class="nc">&nbsp;            JSONObject jsonifiedXML = XML.toJSONObject(xml);</b>
+<b class="nc">&nbsp;            Designate jsonifiedAnalysis = Mapper.getInstance().readValue(jsonifiedXML.toString(), Designate.class);</b>
+<b class="nc">&nbsp;            if (jsonifiedAnalysis.getAnalysis() != null &amp;&amp; jsonifiedAnalysis.getAnalysis().getSolution() != null) {</b>
+<b class="nc">&nbsp;                Solution solution = jsonifiedAnalysis.getAnalysis().getSolution();</b>
+<b class="nc">&nbsp;                if (solution.getProject() != null) {</b>
+<b class="nc">&nbsp;                    Project project = solution.getProject();</b>
+<b class="nc">&nbsp;                    branchService.addBranch(branchName, repoId);</b>
+<b class="nc">&nbsp;                    double complexityDensity = getCyclomaticComplexity(solution.getProject(),</b>
+<b class="nc">&nbsp;                            solution.getMethodCount());</b>
+<b class="nc">&nbsp;                    List&lt;ArchSmell&gt; archSmell = project.getArchSmells().getArchSmell();</b>
+<b class="nc">&nbsp;                    int cycArchDependencies = getSmells(archSmell, CYC_DEPENDENCY).size();</b>
+<b class="nc">&nbsp;                    int godCompArchDependencies = getSmells(archSmell, GOD_COMPONENT).size();</b>
+<b class="nc">&nbsp;                    List&lt;ImplementationSmell&gt; implementationSmell = project.getImplementationSmells()</b>
+<b class="nc">&nbsp;                            .getImplementationSmell();</b>
+<b class="nc">&nbsp;                    int complexCondImpSmells = getSmells(implementationSmell, COMPLEX_CONDITIONAL).size();</b>
+<b class="nc">&nbsp;                    int emptyCatchClauseImpSmells = getSmells(implementationSmell, EMPTY_CATCH_CLAUSE).size();</b>
+<b class="nc">&nbsp;                    List&lt;DesignSmell&gt; designSmell = project.getDesignSmells().getDesignSmell();</b>
+<b class="nc">&nbsp;                    int cycDependentDsSmells = getSmells(designSmell, CYC_DEPENDENT_MOD).size();</b>
+<b class="nc">&nbsp;                    int insufficientModDsSmells = getSmells(designSmell, INSUFFICIENT_MOD).size();</b>
+<b class="nc">&nbsp;                    int unnecessaryAbsDsSmells = getSmells(designSmell, UNNECESSARY_ABST).size();</b>
+<b class="nc">&nbsp;                    int archSmells = solution.getTotalArchSmellCount();</b>
+<b class="nc">&nbsp;                    int designSmells = solution.getTotalDesignSmellCount();</b>
+<b class="nc">&nbsp;                    int impSmells = solution.getTotalImplSmellCount();</b>
+<b class="nc">&nbsp;                    AnalysisEntity analysisEntity = new AnalysisEntity(repoId, branchName, System.currentTimeMillis());</b>
+<b class="nc">&nbsp;                    analysisEntity.setCodeSmell(solution.getSmellDensity());</b>
+<b class="nc">&nbsp;                    analysisEntity.setDuplicatedLines(solution.getCodeDuplication());</b>
+<b class="nc">&nbsp;                    analysisEntity.setCyclomaticComplexity(complexityDensity);</b>
+<b class="nc">&nbsp;                    analysisEntity.setCyclicDependency(cycArchDependencies);</b>
+<b class="nc">&nbsp;                    analysisEntity.setGodComponents(godCompArchDependencies);</b>
+<b class="nc">&nbsp;                    analysisEntity.setComplexConditional(complexCondImpSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setEmptyCatchClause(emptyCatchClauseImpSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setCyclicallyDependentModularization(cycDependentDsSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setInsufficientModularization(insufficientModDsSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setUnnecessaryAbstraction(unnecessaryAbsDsSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setArchSmellDensity(</b>
+<b class="nc">&nbsp;                            archSmells &gt; 0 ? (double) archSmells / solution.getLoc() : archSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setDesignSmellDensity(</b>
+<b class="nc">&nbsp;                            designSmells &gt; 0 ? (double) designSmells / solution.getLoc() : designSmells);</b>
+<b class="nc">&nbsp;                    analysisEntity.setImpSmellDensity(</b>
+<b class="nc">&nbsp;                            impSmells &gt; 0 ? (double) impSmells / solution.getLoc() : impSmells);</b>
+<b class="nc">&nbsp;                    processedAnalysis = analysisRepository.save(analysisEntity);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            return processedAnalysis;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * method calculates project wide cyclomatic complexity
+&nbsp;     * 
+&nbsp;     * @param projectOutput
+&nbsp;     * @param methodCount
+&nbsp;     * @return double
+&nbsp;     */
+&nbsp;    private double getCyclomaticComplexity(Project projectOutput, int methodCount) {
+<b class="nc">&nbsp;        LOGGER.debug(&quot;getCyclomaticComplexity :: Entering the method&quot;);</b>
+<b class="nc">&nbsp;        double complexity = 0.0;</b>
+<b class="nc">&nbsp;        if (projectOutput.getImplementationSmells() != null &amp;&amp; methodCount != 0) {</b>
+<b class="nc">&nbsp;            int complextMethodSmells = projectOutput.getImplementationSmells().getImplementationSmell().stream()</b>
+<b class="nc">&nbsp;                    .filter(smell -&gt; smell != null &amp;&amp; smell.getName() != null)</b>
+<b class="nc">&nbsp;                    .map(smell -&gt; smell.getName().contains(COMPLEX_METHOD))</b>
+<b class="nc">&nbsp;                    .collect(Collectors.toList()).size();</b>
+<b class="nc">&nbsp;            if (complextMethodSmells &gt; 0) {</b>
+<b class="nc">&nbsp;                complexity = ((double) complextMethodSmells / methodCount) * HUNDRED;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        LOGGER.debug(&quot;getCyclomaticComplexity :: Exiting the method with complexity {}&quot;, complexity);</b>
+<b class="nc">&nbsp;        return complexity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get smells of type T from analysis
+&nbsp;     * 
+&nbsp;     * @param smellList
+&nbsp;     * @param smellName
+&nbsp;     * @return List&lt;T&gt;
+&nbsp;     */
+&nbsp;    private &lt;T&gt; List&lt;T&gt; getSmells(List&lt;T&gt; smellList, String smellName) {
+<b class="nc">&nbsp;        LOGGER.debug(&quot;getCyclicDependencies :: Entering the method&quot;);</b>
+<b class="nc">&nbsp;        if (smellList != null &amp;&amp; !smellList.isEmpty()) {</b>
+<b class="nc">&nbsp;            return smellList.stream()</b>
+<b class="nc">&nbsp;                    .filter(smell -&gt; {</b>
+<b class="nc">&nbsp;                        Map&lt;String, Object&gt; map = Mapper.getInstance().convertValue(smell,</b>
+<b class="nc">&nbsp;                                new TypeReference&lt;Map&lt;String, Object&gt;&gt;() {</b>
+&nbsp;                                });
+<b class="nc">&nbsp;                        return map != null &amp;&amp; map.get(NAME) != null</b>
+<b class="nc">&nbsp;                                &amp;&amp; map.get(NAME).toString().equalsIgnoreCase(smellName);</b>
+&nbsp;                    })
+<b class="nc">&nbsp;                    .collect(Collectors.toList());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return Collections.emptyList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-08 23:02</div>
+</div>
+</body>
+</html>
